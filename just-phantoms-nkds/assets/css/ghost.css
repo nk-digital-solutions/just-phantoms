@@ -1,0 +1,4 @@
+/* Page-specific hero background */
+.vehicle-hero::before{
+  background:url('https://images.unsplash.com/photo-1619767886558-efdc259cde1d?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+}
