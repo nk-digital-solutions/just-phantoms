@@ -97,6 +97,10 @@ function just_phantoms_nkds_enqueue_scripts() {
     // Quote page
     if ( $template === 'page-quote.php' ) {
         wp_enqueue_script( 'jp-quote', $uri . '/assets/js/quote.js', array( 'jp-global' ), $v, true );
+        wp_localize_script( 'jp-quote', 'jpVars', array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'nonce'   => wp_create_nonce( 'jp_quote_nonce' ),
+        ) );
     }
 
     // Vehicle detail pages (gallery)
@@ -106,6 +110,32 @@ function just_phantoms_nkds_enqueue_scripts() {
     );
     if ( in_array( $template, $vehicle_templates, true ) ) {
         wp_enqueue_script( 'jp-gallery', $uri . '/assets/js/gallery.js', array( 'jp-global' ), $v, true );
+    }
+}
+
+/* -------------------------------------------------------
+ * 2b. Enqueue vehicle-specific styles
+ * ----------------------------------------------------- */
+add_action( 'wp_enqueue_scripts', 'just_phantoms_nkds_enqueue_vehicle_styles' );
+
+function just_phantoms_nkds_enqueue_vehicle_styles() {
+    $uri = get_stylesheet_directory_uri();
+    $v   = wp_get_theme()->get( 'Version' );
+
+    $vehicle_templates = array(
+        'page-phantom.php', 'page-range-rover.php', 'page-cayenne-limo.php',
+        'page-mustang.php', 'page-vintage.php', 'page-regent.php', 'page-bentley-limo.php',
+    );
+
+    $template = get_page_template_slug();
+
+    if ( in_array( $template, $vehicle_templates, true ) ) {
+        wp_enqueue_style(
+            'jp-ghost',
+            $uri . '/assets/css/ghost.css',
+            array( 'jp-global' ),
+            $v
+        );
     }
 }
 

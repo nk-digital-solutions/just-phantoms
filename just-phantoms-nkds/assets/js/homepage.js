@@ -1,67 +1,19 @@
 // Homepage specific JavaScript functionality
 (function() {
   'use strict';
-  
+
   function initializeHomepage() {
-    // Set current year in footer
-    const yearElement = document.getElementById('year');
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
-    }
-    
-    // Handle quote form submission
-    const quoteForm = document.querySelector('.quote-card');
-    if (quoteForm) {
-      const submitButton = quoteForm.querySelector('.btn.primary');
-      const inputs = quoteForm.querySelectorAll('input, select');
-      
-      if (submitButton) {
-        submitButton.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          // Basic form validation
-          let isValid = true;
-          let formData = {};
-          
-          inputs.forEach(input => {
-            if (input.hasAttribute('required') && !input.value.trim()) {
-              isValid = false;
-              input.style.borderColor = '#ff5252';
-            } else {
-              input.style.borderColor = 'rgba(255,255,255,.12)';
-              if (input.name || input.getAttribute('aria-label')) {
-                const key = input.name || input.getAttribute('aria-label').toLowerCase();
-                formData[key] = input.value;
-              }
-            }
-          });
-          
-          if (isValid) {
-            console.log('Quote form data:', formData);
-            // Here you would normally submit the form data to your backend
-            alert('Thank you! We\'ll get back to you with a quote shortly.');
-          } else {
-            alert('Please fill in all required fields.');
-          }
-        });
-      }
-    }
-    
-    // Smooth scrolling for anchor links that still exist
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
+    // Smooth scrolling for on-page anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
+        var target = document.querySelector(this.getAttribute('href'));
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
-    
+
     // Auto-scroll reviews with pause on hover
     const reviewsSlider = document.querySelector('.reviews .slider');
     if (reviewsSlider) {

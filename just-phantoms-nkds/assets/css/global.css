@@ -22,8 +22,9 @@ html,body{
 a{color:var(--gold);text-decoration:none}
 img{max-width:100%;display:block}
 
-.container{width:min(1200px,92vw);margin:0 auto}
-.container-full{width:100%;max-width:1400px;margin:0 auto;padding:0 min(2rem, 4vw)}
+.container{width:94vw;min-width:1400px;margin:0 auto}
+.container-full{width:94vw;min-width:1400px;margin:0 auto;padding:0 min(2rem, 4vw)}
+@media(max-width:1480px){.container,.container-full{min-width:0;width:94vw}}
 
 /* Buttons */
 .btn{
@@ -510,6 +511,15 @@ footer .container {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .nav{flex-wrap:wrap;gap:.4rem;padding:.6rem 0}
+  .nav .right{
+    width:100%;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:.4rem;
+    padding:.25rem 0 .4rem;
+  }
+  .nav .right .btn{font-size:.8rem;padding:.6rem .75rem}
   .vehicle-title{flex-direction:column;gap:1rem}
   .container-full{padding:0 1rem}
   

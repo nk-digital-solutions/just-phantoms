@@ -3,9 +3,25 @@
 .filter-btn{padding:.75rem 1.25rem;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:transparent;color:var(--text);cursor:pointer;transition:.2s ease;font-weight:500}
 .filter-btn.active,.filter-btn:hover{background:var(--gold);color:#111;border-color:var(--gold)}
 
-/* Vehicle cards */
-.card{transition:opacity .2s ease}
-.card.hidden{display:none}
+/* Fleet grid — flex so filtered cards centre automatically */
+#fleet-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  justify-content:center;
+}
+#fleet-grid .card{
+  flex:0 0 calc(33.333% - 1rem);
+  max-width:calc(33.333% - 1rem);
+}
+#fleet-grid .card.hidden{display:none}
+
+@media (max-width: 1000px) {
+  #fleet-grid .card{flex:0 0 calc(50% - .75rem);max-width:calc(50% - .75rem)}
+}
+@media (max-width: 600px) {
+  #fleet-grid .card{flex:0 0 100%;max-width:100%}
+}
 
 @media (max-width: 768px) {
   .filter-nav{justify-content:flex-start}

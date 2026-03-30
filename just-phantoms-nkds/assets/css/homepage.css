@@ -28,16 +28,8 @@
 .reviews .slide{scroll-snap-align:start;min-width:320px;background:#101010;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem}
 .stars{color:var(--gold);font-size:1rem;letter-spacing:.08em}
 
-/* FAQ */
-.faq .item{border:1px solid rgba(255,255,255,.1);border-radius:14px;margin:.6rem 0;overflow:hidden}
-.faq summary{list-style:none;padding:1rem 1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:600}
-.faq summary::-webkit-details-marker{display:none}
-.faq .content{padding:0 1.1rem 1rem;color:#d9d9d9}
-
-/* Form styles */
+/* Form styles — .form-row inputs inherit from global.css; override column count only */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.form-row input, .form-row select{width:100%;padding:.9rem .95rem;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f0f0f;color:var(--text)}
-.form-row input::placeholder{color:#9f9f9f}
 
 /* Enhanced conversion-focused styles */
 .trust-indicators{display:flex;align-items:center;gap:2rem;margin:1.5rem 0;flex-wrap:wrap}

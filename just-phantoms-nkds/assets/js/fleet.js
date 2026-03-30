@@ -13,7 +13,7 @@
       const shouldShow = filterType === 'all' || categoryList.includes(filterType);
       
       if (shouldShow) {
-        card.style.display = 'block';
+        card.style.display = '';
         card.classList.remove('hidden');
         visibleCount++;
       } else {
