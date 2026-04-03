@@ -3,6 +3,9 @@
 
 RewriteEngine On
 
+# Dynamic sitemap — always route through WordPress, ignore any static file
+RewriteRule ^sitemap\.xml$ index.php?jp_sitemap=1 [L,QSA]
+
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
