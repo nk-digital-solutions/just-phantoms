@@ -202,13 +202,13 @@ header {
     height: 100%;
     background: rgba(10,10,10,.97);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 1.25rem;
     display: none;
     z-index: 100;
     overflow-y: auto;
-    padding: 2rem 1rem;
+    padding: 5rem 1rem 2rem;
   }
   .nav .right.nav-open { display: flex; }
   .nav .right .btn { font-size: 1.1rem; padding: .75rem 1.5rem; width: 80vw; max-width: 320px; justify-content: center; }
