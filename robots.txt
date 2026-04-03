@@ -16,4 +16,4 @@ Disallow: /?s=
 Disallow: /search/
 
 # Sitemap
-Sitemap: https://justphantoms.com/sitemap.xml
+Sitemap: https://justphantoms.co.uk/sitemap.xml
