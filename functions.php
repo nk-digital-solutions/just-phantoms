@@ -319,15 +319,21 @@ function jp_handle_quote_submission() {
 	}
 
 	// Sanitise input.
-	$name        = sanitize_text_field( $_POST['fullName']    ?? '' );
-	$email       = sanitize_email(      $_POST['email']       ?? '' );
-	$phone       = sanitize_text_field( $_POST['phone']       ?? '' );
-	$vehicle     = sanitize_text_field( $_POST['vehicleType'] ?? '' );
-	$event_date  = sanitize_text_field( $_POST['eventDate']   ?? '' );
-	$pickup      = sanitize_textarea_field( $_POST['pickupSearch'] ?? '' );
-	$destination = sanitize_textarea_field( $_POST['destSearch']   ?? '' );
-	$notes       = sanitize_textarea_field( $_POST['message']      ?? '' );
-	$form_type   = sanitize_text_field( $_POST['quoteType']   ?? 'general' );
+	$name             = sanitize_text_field( $_POST['fullName']       ?? '' );
+	$email            = sanitize_email(      $_POST['email']          ?? '' );
+	$phone            = sanitize_text_field( $_POST['phone']          ?? '' );
+	$vehicle          = sanitize_text_field( $_POST['vehicleType']    ?? '' );
+	$event_date       = sanitize_text_field( $_POST['eventDate']      ?? '' );
+	$pickup_hour      = sanitize_text_field( $_POST['pickupHour']     ?? '' );
+	$pickup_min       = sanitize_text_field( $_POST['pickupMin']      ?? '' );
+	$pickup_ampm      = sanitize_text_field( $_POST['pickupAmPm']     ?? '' );
+	$pickup_time      = ( $pickup_hour && $pickup_min ) ? "{$pickup_hour}:{$pickup_min} {$pickup_ampm}" : '';
+	$pickup           = sanitize_textarea_field( $_POST['pickupSearch']    ?? '' );
+	$pickup_postcode  = sanitize_text_field( $_POST['pickupPostcode'] ?? '' );
+	$destination      = sanitize_textarea_field( $_POST['destSearch']      ?? '' );
+	$dest_postcode    = sanitize_text_field( $_POST['destPostcode']   ?? '' );
+	$notes            = sanitize_textarea_field( $_POST['message']         ?? '' );
+	$form_type        = sanitize_text_field( $_POST['quoteType']      ?? 'general' );
 
 	// Basic validation.
 	if ( ! $name || ! is_email( $email ) || ! $phone ) {
@@ -357,14 +363,17 @@ function jp_handle_quote_submission() {
 	// Build email body.
 	$subject = sprintf( '[Just Phantoms] New %s Quote Request from %s', ucfirst( $form_type ), $name );
 	$body    = "New quote enquiry received:\n\n";
-	$body   .= "Name:        {$name}\n";
-	$body   .= "Email:       {$email}\n";
-	$body   .= "Phone:       {$phone}\n";
-	$body   .= "Vehicle:     {$vehicle}\n";
-	$body   .= "Event Date:  {$event_date}\n";
-	$body   .= "Pickup:      {$pickup}\n";
-	$body   .= "Destination: {$destination}\n";
-	$body   .= "Notes:       {$notes}\n";
+	$body   .= "Name:              {$name}\n";
+	$body   .= "Email:             {$email}\n";
+	$body   .= "Phone:             {$phone}\n";
+	$body   .= "Vehicle:           {$vehicle}\n";
+	$body   .= "Event Date:        {$event_date}\n";
+	$body   .= "Collection Time:   {$pickup_time}\n";
+	$body   .= "Pickup Address:    {$pickup}\n";
+	$body   .= "Pickup Postcode:   {$pickup_postcode}\n";
+	$body   .= "Destination:       {$destination}\n";
+	$body   .= "Dest. Postcode:    {$dest_postcode}\n";
+	$body   .= "Notes:             {$notes}\n";
 	$body   .= "\nSubmitted: " . current_time( 'mysql' );
 
 	$headers = array(
