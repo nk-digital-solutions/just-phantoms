@@ -397,7 +397,22 @@ add_action( 'wp_ajax_jp_quote',        'jp_handle_quote_submission' );
 add_action( 'wp_ajax_nopriv_jp_quote', 'jp_handle_quote_submission' );
 
 /* ─────────────────────────────────────────
- * 5. Custom Image Sizes
+ * 5. SMTP Mail Configuration (Plesk)
+ * ───────────────────────────────────────── */
+add_action( 'phpmailer_init', function( $phpmailer ) {
+	$phpmailer->isSMTP();
+	$phpmailer->Host       = 'localhost';
+	$phpmailer->Port       = 25;
+	$phpmailer->SMTPAuth   = false;
+	$phpmailer->From       = 'info@justphantoms.co.uk';
+	$phpmailer->FromName   = 'Just Phantoms';
+} );
+
+add_filter( 'wp_mail_from',      function() { return 'info@justphantoms.co.uk'; } );
+add_filter( 'wp_mail_from_name', function() { return 'Just Phantoms'; } );
+
+/* ─────────────────────────────────────────
+ * 6. Custom Image Sizes
  * ───────────────────────────────────────── */
 add_image_size( 'jp-fleet-card',   800, 500, true );
 add_image_size( 'jp-vehicle-hero', 1600, 700, true );
