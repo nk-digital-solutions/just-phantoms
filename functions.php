@@ -267,15 +267,20 @@ add_action( 'pre_get_posts', function( $query ) {
 add_action( 'add_meta_boxes', function() {
 	add_meta_box( 'jp_quote_details', 'Submission Details', function( $post ) {
 		$fields = array(
-			'_jp_form_type'  => 'Quote Type',
-			'_jp_email'      => 'Email',
-			'_jp_phone'      => 'Phone',
-			'_jp_vehicle'    => 'Vehicle',
-			'_jp_event_date' => 'Event Date',
-			'_jp_pickup'     => 'Pickup',
-			'_jp_destination'=> 'Destination',
-			'_jp_notes'      => 'Notes',
-			'_jp_email_sent' => 'Email Sent',
+			'_jp_form_type'        => 'Quote Type',
+			'_jp_email'            => 'Email',
+			'_jp_phone'            => 'Phone',
+			'_jp_vehicle'          => 'Vehicle',
+			'_jp_event_date'       => 'Event Date',
+			'_jp_pickup_time'      => 'Collection Time',
+			'_jp_pickup'           => 'Pickup Address',
+			'_jp_pickup_postcode'  => 'Pickup Postcode',
+			'_jp_destination'      => 'Destination',
+			'_jp_dest_postcode'    => 'Dest. Postcode',
+			'_jp_return_address'   => 'Return Address',
+			'_jp_return_postcode'  => 'Return Postcode',
+			'_jp_notes'            => 'Notes',
+			'_jp_email_sent'       => 'Email Sent',
 		);
 		echo '<table style="width:100%;border-collapse:collapse">';
 		foreach ( $fields as $key => $label ) {
@@ -351,15 +356,20 @@ function jp_handle_quote_submission() {
 	) );
 
 	if ( $post_id && ! is_wp_error( $post_id ) ) {
-		update_post_meta( $post_id, '_jp_form_type',   $form_type );
-		update_post_meta( $post_id, '_jp_email',       $email );
-		update_post_meta( $post_id, '_jp_phone',       $phone );
-		update_post_meta( $post_id, '_jp_vehicle',     $vehicle );
-		update_post_meta( $post_id, '_jp_event_date',  $event_date );
-		update_post_meta( $post_id, '_jp_pickup',      $pickup );
-		update_post_meta( $post_id, '_jp_destination', $destination );
-		update_post_meta( $post_id, '_jp_notes',       $notes );
-		update_post_meta( $post_id, '_jp_email_sent',  'pending' );
+		update_post_meta( $post_id, '_jp_form_type',        $form_type );
+		update_post_meta( $post_id, '_jp_email',             $email );
+		update_post_meta( $post_id, '_jp_phone',             $phone );
+		update_post_meta( $post_id, '_jp_vehicle',           $vehicle );
+		update_post_meta( $post_id, '_jp_event_date',        $event_date );
+		update_post_meta( $post_id, '_jp_pickup_time',       $pickup_time );
+		update_post_meta( $post_id, '_jp_pickup',            $pickup );
+		update_post_meta( $post_id, '_jp_pickup_postcode',   $pickup_postcode );
+		update_post_meta( $post_id, '_jp_destination',       $destination );
+		update_post_meta( $post_id, '_jp_dest_postcode',     $dest_postcode );
+		update_post_meta( $post_id, '_jp_return_address',    $return_address );
+		update_post_meta( $post_id, '_jp_return_postcode',   $return_postcode );
+		update_post_meta( $post_id, '_jp_notes',             $notes );
+		update_post_meta( $post_id, '_jp_email_sent',        'pending' );
 	}
 
 	// Build branded HTML email body.
