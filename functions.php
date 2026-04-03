@@ -517,30 +517,86 @@ function jp_handle_quote_submission() {
 		$confirm_subject = 'Just Phantoms — We\'ve received your enquiry!';
 		$confirm_body    = '<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:30px 0;">
   <tr><td align="center">
     <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);">
+
+      <!-- Header -->
       <tr>
         <td style="background:#1a1a1a;padding:28px 32px;text-align:center;">
           <p style="margin:0;font-size:22px;font-weight:700;color:#c9a96e;letter-spacing:2px;text-transform:uppercase;">Just Phantoms</p>
           <p style="margin:6px 0 0;font-size:13px;color:#aaa;letter-spacing:1px;">Luxury Chauffeur Car Hire</p>
         </td>
       </tr>
+
+      <!-- Banner -->
       <tr>
-        <td style="padding:32px;">
-          <p style="margin:0 0 16px;font-size:16px;color:#222;">Hi ' . esc_html( $name ) . ',</p>
-          <p style="margin:0 0 16px;font-size:15px;color:#444;line-height:1.6;">Thank you for your enquiry! We\'ve received your quote request and will be in touch within a few hours.</p>
-          <p style="margin:0 0 24px;font-size:15px;color:#444;line-height:1.6;">If you need to speak to us urgently, please don\'t hesitate to call us directly.</p>
-          <a href="tel:07504040407" style="display:inline-block;background:#c9a96e;color:#1a1a1a;text-decoration:none;font-weight:700;font-size:14px;padding:12px 28px;border-radius:4px;">Call 07504 040 407</a>
+        <td style="background:#c9a96e;padding:14px 32px;text-align:center;">
+          <p style="margin:0;font-size:15px;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:1px;">Enquiry Received — Thank You!</p>
         </td>
       </tr>
+
+      <!-- Intro -->
+      <tr>
+        <td style="padding:28px 32px 8px;">
+          <p style="margin:0 0 12px;font-size:16px;color:#222;">Hi ' . esc_html( $name ) . ',</p>
+          <p style="margin:0 0 12px;font-size:15px;color:#444;line-height:1.6;">Thank you for your enquiry! We\'ve received your quote request and will be in touch within a few hours to discuss pricing.</p>
+          <p style="margin:0;font-size:15px;color:#444;line-height:1.6;">For your reference, here is a summary of what you submitted:</p>
+        </td>
+      </tr>
+
+      <!-- Booking Details -->
+      <tr>
+        <td style="padding:16px 32px 0;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Booking Details</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
+            ' . $row( 'Vehicle', $vehicle )
+            . $row( 'Event Date', $event_date )
+            . $row( 'Collection Time', $pickup_time ) . '
+          </table>
+        </td>
+      </tr>
+
+      <!-- Journey -->
+      <tr>
+        <td style="padding:16px 32px 0;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Journey</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
+            ' . $row( 'Pickup', $pickup )
+            . $row( 'Destination', $destination )
+            . $row( 'Additional Stops', $stops_text )
+            . $row( 'Return Address', $return_address )
+            . $row( 'Return Time', $return_time ) . '
+          </table>
+        </td>
+      </tr>
+
+      ' . ( ! empty( trim( $notes ) ) ? '
+      <!-- Notes -->
+      <tr>
+        <td style="padding:16px 32px 0;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Additional Notes</p>
+          <div style="border:1px solid #eee;border-radius:6px;padding:12px 16px;color:#333;font-size:14px;">' . nl2br( esc_html( $notes ) ) . '</div>
+        </td>
+      </tr>' : '' ) . '
+
+      <!-- CTA -->
+      <tr>
+        <td style="padding:24px 32px 16px;">
+          <p style="margin:0 0 16px;font-size:14px;color:#555;line-height:1.6;">If anything looks incorrect or you need to make a change, please don\'t hesitate to get in touch.</p>
+          <a href="tel:07504040407" style="display:inline-block;background:#c9a96e;color:#1a1a1a;text-decoration:none;font-weight:700;font-size:14px;padding:12px 28px;border-radius:4px;letter-spacing:.5px;">Call 07504 040 407</a>
+        </td>
+      </tr>
+
+      <!-- Footer -->
       <tr>
         <td style="background:#f9f9f9;border-top:1px solid #eee;padding:16px 32px;text-align:center;">
           <p style="margin:0;font-size:12px;color:#999;">Just Phantoms &nbsp;|&nbsp; justphantoms.co.uk &nbsp;|&nbsp; 07504 040 407</p>
         </td>
       </tr>
+
     </table>
   </td></tr>
 </table>
