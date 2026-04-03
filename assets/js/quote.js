@@ -142,7 +142,7 @@
     var fieldMap = {
       pickupSearch: 'pickupPostcodeAuto',
       destSearch:   'destPostcodeAuto',
-      returnSearch: null,
+      returnSearch: 'returnPostcodeAuto',
     };
 
     Object.keys(fieldMap).forEach(function (fieldId) {

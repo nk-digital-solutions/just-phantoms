@@ -331,8 +331,10 @@ function jp_handle_quote_submission() {
 	$pickup           = sanitize_textarea_field( $_POST['pickupSearch']    ?? '' );
 	$pickup_postcode  = sanitize_text_field( $_POST['pickupPostcodeAuto'] ?? $_POST['pickupPostcode'] ?? '' );
 	$destination      = sanitize_textarea_field( $_POST['destSearch']      ?? '' );
-	$dest_postcode    = sanitize_text_field( $_POST['destPostcodeAuto'] ?? $_POST['destPostcode']   ?? '' );
-	$notes            = sanitize_textarea_field( $_POST['message']         ?? '' );
+	$dest_postcode    = sanitize_text_field( $_POST['destPostcodeAuto']   ?? $_POST['destPostcode']   ?? '' );
+	$return_address   = sanitize_textarea_field( $_POST['returnSearch']     ?? '' );
+	$return_postcode  = sanitize_text_field( $_POST['returnPostcodeAuto'] ?? $_POST['returnPostcode'] ?? '' );
+	$notes            = sanitize_textarea_field( $_POST['message']          ?? '' );
 	$form_type        = sanitize_text_field( $_POST['quoteType']      ?? 'general' );
 
 	// Basic validation.
@@ -373,6 +375,8 @@ function jp_handle_quote_submission() {
 	$body   .= "Pickup Postcode:   {$pickup_postcode}\n";
 	$body   .= "Destination:       {$destination}\n";
 	$body   .= "Dest. Postcode:    {$dest_postcode}\n";
+	$body   .= "Return Address:    {$return_address}\n";
+	$body   .= "Return Postcode:   {$return_postcode}\n";
 	$body   .= "Notes:             {$notes}\n";
 	$body   .= "\nSubmitted: " . current_time( 'mysql' );
 

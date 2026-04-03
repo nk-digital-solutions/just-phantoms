@@ -179,6 +179,7 @@ get_header(); ?>
                     <input type="text" id="returnSearch" name="returnSearch" placeholder="Start typing return address or postcode..." autocomplete="off">
                     <button type="button" class="btn-input-action" data-entry="return">Enter Manually</button>
                   </div>
+                  <input type="hidden" name="returnPostcodeAuto" id="returnPostcodeAuto">
                 </div>
                 <div class="manual-container" id="returnManual" style="display:none">
                   <div class="manual-grid">
