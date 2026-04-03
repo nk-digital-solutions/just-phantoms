@@ -15,13 +15,13 @@
   // Vehicle image map (relative to theme assets/images/)
   // ------------------------------------------------------------------
   var vehicleImages = {
-    'rolls-royce-phantom':    'images/fleet/rolls-royce-phantom/Rolls Royce Phantom.jpg',
-    'range-rover-executive':  'images/fleet/range-rover/Range Rover Executive LWB SVO.jpg',
-    'porsche-cayenne-limo':   'images/fleet/porsche-cayenne-limo/Porsche Cayenne Limo.jpg',
-    'bentley-chrysler-limo':  'images/fleet/bentley-chrysler-limo/Baby Bentley Chrysler Limo.png',
-    'mustang-gt500':          'images/fleet/mustang-gt500/2.jpg',
-    'vintage-car':            "images/fleet/vintage/1930's Vintage Classic Car.jpg",
-    'regent-landaulette':     'images/fleet/regent/regent-landaulette-convertible.png',
+    'rolls-royce-phantom':    'assets/images/fleet/rolls-royce-phantom/Rolls Royce Phantom.jpg',
+    'range-rover-executive':  'assets/images/fleet/range-rover/Range Rover Executive LWB SVO.jpg',
+    'porsche-cayenne-limo':   'assets/images/fleet/porsche-cayenne-limo/Porsche Cayenne Limo.jpg',
+    'bentley-chrysler-limo':  'assets/images/fleet/bentley-chrysler-limo/Baby Bentley Chrysler Limo.png',
+    'mustang-gt500':          'assets/images/fleet/mustang-gt500/2.jpg',
+    'vintage-car':            "assets/images/fleet/vintage/1930's Vintage Classic Car.jpg",
+    'regent-landaulette':     'assets/images/fleet/regent/regent-landaulette-convertible.png',
   };
 
   // ------------------------------------------------------------------
