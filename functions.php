@@ -402,8 +402,8 @@ add_action( 'wp_ajax_nopriv_jp_quote', 'jp_handle_quote_submission' );
 add_action( 'phpmailer_init', function( $phpmailer ) {
 	$phpmailer->isSMTP();
 	$phpmailer->Host        = 'smtp.ionos.co.uk';
-	$phpmailer->Port        = 587;
-	$phpmailer->SMTPSecure  = 'tls';
+	$phpmailer->Port        = 465;
+	$phpmailer->SMTPSecure  = 'ssl';
 	$phpmailer->SMTPAuth    = true;
 	$phpmailer->Username    = 'info@justphantoms.co.uk';
 	$phpmailer->Password    = defined( 'JP_SMTP_PASS' ) ? JP_SMTP_PASS : '';
