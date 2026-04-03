@@ -194,8 +194,28 @@ get_header(); ?>
                 </div>
               </div>
               <div class="form-group" style="margin-top:1rem">
-                <label for="returnTime">Return Time</label>
-                <input type="time" id="returnTime" name="returnTime">
+                <label>Return Time</label>
+                <div class="time-picker-wrap">
+                  <select class="time-select" id="returnHour" name="returnHour">
+                    <option value="" disabled selected>Hour</option>
+                    <?php for ( $h = 1; $h <= 12; $h++ ) : ?>
+                      <option value="<?php echo $h; ?>"><?php echo $h; ?></option>
+                    <?php endfor; ?>
+                  </select>
+                  <span class="time-colon">:</span>
+                  <select class="time-select" id="returnMin" name="returnMin">
+                    <option value="" disabled selected>Min</option>
+                    <?php foreach ( array( '00','05','10','15','20','25','30','35','40','45','50','55' ) as $m ) : ?>
+                      <option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                  <div class="ampm-toggle">
+                    <input type="radio" name="returnAmPm" value="AM" id="returnAM" class="ampm-radio">
+                    <label for="returnAM" class="ampm-btn">AM</label>
+                    <input type="radio" name="returnAmPm" value="PM" id="returnPM" class="ampm-radio">
+                    <label for="returnPM" class="ampm-btn">PM</label>
+                  </div>
+                </div>
               </div>
             </div>
 

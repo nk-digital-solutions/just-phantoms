@@ -279,6 +279,8 @@ add_action( 'add_meta_boxes', function() {
 			'_jp_dest_postcode'    => 'Dest. Postcode',
 			'_jp_return_address'   => 'Return Address',
 			'_jp_return_postcode'  => 'Return Postcode',
+			'_jp_return_time'      => 'Return Time',
+			'_jp_stops'            => 'Additional Stops',
 			'_jp_notes'            => 'Notes',
 			'_jp_email_sent'       => 'Email Sent',
 		);
@@ -339,6 +341,19 @@ function jp_handle_quote_submission() {
 	$dest_postcode    = sanitize_text_field( $_POST['destPostcodeAuto']   ?? $_POST['destPostcode']   ?? '' );
 	$return_address   = sanitize_textarea_field( $_POST['returnSearch']     ?? '' );
 	$return_postcode  = sanitize_text_field( $_POST['returnPostcodeAuto'] ?? $_POST['returnPostcode'] ?? '' );
+	$return_hour      = sanitize_text_field( $_POST['returnHour']  ?? '' );
+	$return_min       = sanitize_text_field( $_POST['returnMin']   ?? '' );
+	$return_ampm      = sanitize_text_field( $_POST['returnAmPm']  ?? '' );
+	$return_time      = ( $return_hour && $return_min ) ? "{$return_hour}:{$return_min} {$return_ampm}" : '';
+	$stops            = array();
+	for ( $i = 1; $i <= 5; $i++ ) {
+		$stop_addr = sanitize_textarea_field( $_POST[ 'stop' . $i ] ?? '' );
+		$stop_pc   = sanitize_text_field( $_POST[ 'stop' . $i . 'Postcode' ] ?? '' );
+		if ( $stop_addr ) {
+			$stops[] = $stop_addr . ( $stop_pc ? ' (' . $stop_pc . ')' : '' );
+		}
+	}
+	$stops_text       = implode( ' | ', $stops );
 	$notes            = sanitize_textarea_field( $_POST['message']          ?? '' );
 	$form_type        = sanitize_text_field( $_POST['quoteType']      ?? 'general' );
 
@@ -368,6 +383,8 @@ function jp_handle_quote_submission() {
 		update_post_meta( $post_id, '_jp_dest_postcode',     $dest_postcode );
 		update_post_meta( $post_id, '_jp_return_address',    $return_address );
 		update_post_meta( $post_id, '_jp_return_postcode',   $return_postcode );
+		update_post_meta( $post_id, '_jp_return_time',       $return_time );
+		update_post_meta( $post_id, '_jp_stops',             $stops_text );
 		update_post_meta( $post_id, '_jp_notes',             $notes );
 		update_post_meta( $post_id, '_jp_email_sent',        'pending' );
 	}
@@ -446,7 +463,9 @@ function jp_handle_quote_submission() {
             . $row( 'Destination', $destination )
             . $row( 'Dest. Postcode', $dest_postcode )
             . $row( 'Return Address', $return_address )
-            . $row( 'Return Postcode', $return_postcode ) . '
+            . $row( 'Return Postcode', $return_postcode )
+            . $row( 'Return Time', $return_time )
+            . $row( 'Additional Stops', $stops_text ) . '
           </table>
         </td>
       </tr>
