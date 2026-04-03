@@ -217,7 +217,8 @@
             var base = (typeof jpAjax !== 'undefined' && jpAjax.siteUrl) ? jpAjax.siteUrl : '';
             window.location.href = base + '/thank-you/';
           } else {
-            alert(json.data || 'Something went wrong. Please try again or call us on 07504 040 407.');
+            var msg = (json.data && json.data.message) ? json.data.message : (typeof json.data === 'string' ? json.data : 'Something went wrong. Please try again or call us on 07504 040 407.');
+            alert(msg);
           }
         })
         .catch(function () {
