@@ -139,13 +139,49 @@
   function initPlacesAutocomplete() {
     if (typeof google === 'undefined' || typeof google.maps === 'undefined') return;
 
-    var fields = ['pickupSearch', 'destSearch', 'returnSearch'];
-    fields.forEach(function (fieldId) {
+    var fieldMap = {
+      pickupSearch: 'pickupPostcodeAuto',
+      destSearch:   'destPostcodeAuto',
+      returnSearch: null,
+    };
+
+    Object.keys(fieldMap).forEach(function (fieldId) {
       var input = document.getElementById(fieldId);
       if (!input) return;
-      new google.maps.places.Autocomplete(input, {
+
+      var autocomplete = new google.maps.places.Autocomplete(input, {
         componentRestrictions: { country: 'gb' },
-        types: ['address'],
+        types: ['establishment', 'geocode'],
+        fields: ['name', 'formatted_address', 'address_components'],
+      });
+
+      autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+        if (!place || !place.address_components) return;
+
+        // Extract postcode from address components
+        var postcode = '';
+        place.address_components.forEach(function (component) {
+          if (component.types.indexOf('postal_code') !== -1) {
+            postcode = component.long_name;
+          }
+        });
+
+        // Build full address: prepend business name if available
+        var fullAddress = place.formatted_address || '';
+        if (place.name && fullAddress.indexOf(place.name) === -1) {
+          fullAddress = place.name + ', ' + fullAddress;
+        }
+
+        // Set the search field to the full address
+        input.value = fullAddress;
+
+        // Populate hidden postcode field
+        var postcodeFieldId = fieldMap[fieldId];
+        if (postcodeFieldId) {
+          var postcodeField = document.getElementById(postcodeFieldId);
+          if (postcodeField) postcodeField.value = postcode;
+        }
       });
     });
   }

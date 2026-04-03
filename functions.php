@@ -329,9 +329,9 @@ function jp_handle_quote_submission() {
 	$pickup_ampm      = sanitize_text_field( $_POST['pickupAmPm']     ?? '' );
 	$pickup_time      = ( $pickup_hour && $pickup_min ) ? "{$pickup_hour}:{$pickup_min} {$pickup_ampm}" : '';
 	$pickup           = sanitize_textarea_field( $_POST['pickupSearch']    ?? '' );
-	$pickup_postcode  = sanitize_text_field( $_POST['pickupPostcode'] ?? '' );
+	$pickup_postcode  = sanitize_text_field( $_POST['pickupPostcodeAuto'] ?? $_POST['pickupPostcode'] ?? '' );
 	$destination      = sanitize_textarea_field( $_POST['destSearch']      ?? '' );
-	$dest_postcode    = sanitize_text_field( $_POST['destPostcode']   ?? '' );
+	$dest_postcode    = sanitize_text_field( $_POST['destPostcodeAuto'] ?? $_POST['destPostcode']   ?? '' );
 	$notes            = sanitize_textarea_field( $_POST['message']         ?? '' );
 	$form_type        = sanitize_text_field( $_POST['quoteType']      ?? 'general' );
 

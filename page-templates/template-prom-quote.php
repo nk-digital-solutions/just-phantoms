@@ -112,6 +112,7 @@ get_header(); ?>
                   <input type="text" id="pickupSearch" name="pickupSearch" placeholder="Start typing address or postcode..." autocomplete="off">
                   <button type="button" class="btn-input-action" data-entry="pickup">Enter Manually</button>
                 </div>
+                <input type="hidden" name="pickupPostcodeAuto" id="pickupPostcodeAuto">
               </div>
               <div class="manual-container" id="pickupManual" style="display:none">
                 <div class="manual-grid">
@@ -133,6 +134,7 @@ get_header(); ?>
                   <input type="text" id="destSearch" name="destSearch" placeholder="Start typing prom venue or postcode..." autocomplete="off">
                   <button type="button" class="btn-input-action" data-entry="dest">Enter Manually</button>
                 </div>
+                <input type="hidden" name="destPostcodeAuto" id="destPostcodeAuto">
               </div>
               <div class="manual-container" id="destManual" style="display:none">
                 <div class="manual-grid">
