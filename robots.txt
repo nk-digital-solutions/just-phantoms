@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Block WordPress admin & sensitive endpoints
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /wp-json/
+
+# Block internal/confirmation pages
+Disallow: /thank-you/
+
+# Block search results
+Disallow: /?s=
+Disallow: /search/
+
+# Sitemap
+Sitemap: https://justphantoms.com/sitemap.xml

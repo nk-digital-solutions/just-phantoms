@@ -417,3 +417,108 @@ remove_action( 'wp_head',             'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles',     'print_emoji_styles' );
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles',  'print_emoji_styles' );
+
+/* ─────────────────────────────────────────
+ * 8. Dynamic XML Sitemap  (/sitemap.xml)
+ * ───────────────────────────────────────── */
+add_action( 'init', function() {
+	add_rewrite_rule( '^sitemap\.xml$', 'index.php?jp_sitemap=1', 'top' );
+} );
+
+add_filter( 'query_vars', function( $vars ) {
+	$vars[] = 'jp_sitemap';
+	return $vars;
+} );
+
+add_action( 'template_redirect', function() {
+	if ( ! get_query_var( 'jp_sitemap' ) ) return;
+
+	// Pages excluded from the sitemap entirely.
+	$excluded = [
+		'page-templates/template-thankyou.php',
+	];
+
+	// Main navigational pages — highest priority after homepage.
+	$high_priority = [
+		'page-templates/template-fleet.php',
+		'page-templates/template-services.php',
+		'page-templates/template-reviews.php',
+		'page-templates/template-faq.php',
+		'page-templates/template-locations.php',
+		'page-templates/template-about.php',
+		'page-templates/template-promise.php',
+		'page-templates/template-quote.php',
+		'page-templates/template-wedding-quote.php',
+		'page-templates/template-prom-quote.php',
+	];
+
+	// Individual vehicle showcase pages.
+	$vehicle_pages = [
+		'page-templates/template-phantom.php',
+		'page-templates/template-cayenne-limo.php',
+		'page-templates/template-bentley-chrysler-limo.php',
+		'page-templates/template-mustang-gt500.php',
+		'page-templates/template-range-rover.php',
+		'page-templates/template-regent-landaulette.php',
+		'page-templates/template-vintage.php',
+	];
+
+	$pages = get_posts( [
+		'post_type'      => 'page',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+		'orderby'        => 'menu_order',
+		'order'          => 'ASC',
+	] );
+
+	header( 'Content-Type: application/xml; charset=UTF-8' );
+	header( 'X-Robots-Tag: noindex, follow' );
+
+	echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+	echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+	// Homepage.
+	echo "\t<url>\n";
+	echo "\t\t<loc>" . esc_url( trailingslashit( home_url() ) ) . "</loc>\n";
+	echo "\t\t<changefreq>weekly</changefreq>\n";
+	echo "\t\t<priority>1.0</priority>\n";
+	echo "\t</url>\n";
+
+	foreach ( $pages as $page_id ) {
+		$template = get_post_meta( $page_id, '_wp_page_template', true );
+
+		if ( in_array( $template, $excluded, true ) ) continue;
+
+		// Set priority and changefreq based on page type.
+		if ( in_array( $template, $high_priority, true ) ) {
+			$priority   = '0.9';
+			$changefreq = 'weekly';
+		} elseif ( in_array( $template, $vehicle_pages, true ) ) {
+			$priority   = '0.8';
+			$changefreq = 'monthly';
+		} elseif ( $template === 'page-templates/template-location-page.php' ) {
+			$priority   = '0.7';
+			$changefreq = 'monthly';
+		} elseif ( $template === 'page-templates/template-privacy.php' ) {
+			$priority   = '0.3';
+			$changefreq = 'yearly';
+		} else {
+			$priority   = '0.6';
+			$changefreq = 'monthly';
+		}
+
+		$permalink = get_permalink( $page_id );
+		$modified  = get_post_modified_time( 'Y-m-d', false, $page_id );
+
+		echo "\t<url>\n";
+		echo "\t\t<loc>" . esc_url( $permalink ) . "</loc>\n";
+		echo "\t\t<lastmod>" . esc_html( $modified ) . "</lastmod>\n";
+		echo "\t\t<changefreq>" . esc_html( $changefreq ) . "</changefreq>\n";
+		echo "\t\t<priority>" . esc_html( $priority ) . "</priority>\n";
+		echo "\t</url>\n";
+	}
+
+	echo '</urlset>';
+	exit;
+} );
