@@ -522,3 +522,366 @@ add_action( 'template_redirect', function() {
 	echo '</urlset>';
 	exit;
 } );
+
+/* ─────────────────────────────────────────
+ * 9. SEO Enhancements — Yoast Filters + JSON-LD Schema
+ * ───────────────────────────────────────── */
+
+/**
+ * Detect the service label for a location page from its post slug prefix.
+ */
+function jp_loc_service_label(): string {
+	$slug = get_post_field( 'post_name', get_the_ID() );
+	$map  = [
+		'rolls-royce-phantom'                => 'Rolls Royce Phantom Hire',
+		'range-rover-executive-lwb-svo'      => 'Range Rover Executive Hire',
+		'porsche-cayenne-limo'               => 'Porsche Cayenne Limo Hire',
+		'baby-bentley-chrysler-limo'         => 'Baby Bentley Limo Hire',
+		'limited-edition-ford-mustang-gt500' => 'Ford Mustang GT500 Hire',
+		'1930s-vintage-classic'              => '1930s Vintage Classic Car Hire',
+		'regent-landaulette-convertible'     => 'Regent Landaulette Hire',
+		'birthday-limo-hire'                 => 'Birthday Limo Hire',
+		'prom-limo-hire'                     => 'Prom Limo Hire',
+		'wedding-car-hire'                   => 'Wedding Car Hire',
+		'luxury-car-hire'                    => 'Luxury Car Hire',
+		'phantom-hire'                       => 'Phantom Hire',
+		'limo-hire'                          => 'Limo Hire',
+		'rolls-royce-hire'                   => 'Rolls Royce Hire',
+		'mustang-car-hire'                   => 'Mustang Car Hire',
+		'classic-car-hire'                   => 'Classic Car Hire',
+	];
+	foreach ( $map as $prefix => $label ) {
+		if ( str_starts_with( $slug, $prefix . '-' ) ) return $label;
+	}
+	return 'Luxury Car Hire';
+}
+
+/**
+ * Returns [title, desc, kw] for the current page/template.
+ * Returns [] if no match (Yoast falls back to its own output).
+ */
+function jp_seo_data(): array {
+	if ( is_front_page() ) {
+		return [
+			'title' => 'Luxury Wedding & Prom Car Hire | Just Phantoms',
+			'desc'  => '5-star rated luxury chauffeur-driven Wedding and Prom car hire across Lancashire, Yorkshire, Cumbria, Derbyshire and Nottinghamshire. Rolls Royce Phantom, stretch Limousines and vintage classics. Price-match guaranteed.',
+			'kw'    => 'wedding car hire Lancashire',
+		];
+	}
+	$map = [
+		'fleet' => [
+			'title' => 'Luxury Wedding & Prom Vehicle Fleet | Just Phantoms',
+			'desc'  => 'Our fleet includes the Rolls Royce Phantom, Porsche Cayenne Limo, Baby Bentley, Ford Mustang GT500, Range Rover SVO, Regent Landaulette and 1930s Vintage Classic. Available for Weddings and Proms across the North of England.',
+			'kw'    => 'luxury wedding car hire fleet',
+		],
+		'services' => [
+			'title' => 'Wedding & Prom Car Hire Services | Just Phantoms',
+			'desc'  => 'Chauffeur-driven Wedding transport, Prom Limousines, airport transfers, VIP executive hire and music video vehicles. Tailored chauffeur services across Lancashire, Yorkshire and beyond.',
+			'kw'    => 'wedding car hire services Lancashire',
+		],
+		'reviews' => [
+			'title' => 'Customer Reviews | 5-Star Wedding Car Hire | Just Phantoms',
+			'desc'  => '5-star reviews from real Wedding and Prom customers. Rated 4.9 stars by 500+ happy clients across Lancashire, Yorkshire and the North of England.',
+			'kw'    => 'wedding car hire reviews',
+		],
+		'faq' => [
+			'title' => 'Wedding Car Hire FAQ | Frequently Asked Questions | Just Phantoms',
+			'desc'  => 'Common questions about booking Wedding and Prom car hire — pricing, coverage areas, what is included, timings and payment. Get answers or call us directly.',
+			'kw'    => 'wedding car hire FAQ',
+		],
+		'locations' => [
+			'title' => 'Wedding & Prom Car Hire Locations | Just Phantoms',
+			'desc'  => 'Luxury Wedding and Prom car hire across Lancashire, Yorkshire, Cumbria, Derbyshire and Nottinghamshire. Browse 70+ locations and book your chauffeur-driven vehicle today.',
+			'kw'    => 'wedding car hire locations',
+		],
+		'about' => [
+			'title' => 'About Just Phantoms | Luxury Car Hire Since 1996',
+			'desc'  => 'Just Phantoms — luxury car hire established in 1996 with offices in Lancashire and London. 500+ events, 7 premium vehicles and a 4.9-star rated chauffeur service.',
+			'kw'    => 'about Just Phantoms chauffeur hire',
+		],
+		'promise' => [
+			'title' => 'Our Promise | Just Phantoms Luxury Car Hire',
+			'desc'  => '15-minute early arrival, price-match guarantee, freshly valeted vehicles and DBS-checked chauffeurs — our commitment to every client for every single booking.',
+			'kw'    => 'just phantoms promise guarantee',
+		],
+		'wedding-quote' => [
+			'title' => 'Get a Free Wedding Car Quote | Just Phantoms',
+			'desc'  => 'Request a free Wedding car quote. We beat any like-for-like quote by 10%. Rolls Royce, vintage classics and luxury vehicles across the North of England.',
+			'kw'    => 'wedding car hire quote',
+		],
+		'prom-quote' => [
+			'title' => 'Get a Free Prom Limo Quote | Just Phantoms',
+			'desc'  => 'Request your free Prom Limo quote. Porsche Cayenne Limo, Mustang GT500 and Baby Bentley available. Group bookings welcome across Lancashire and Yorkshire.',
+			'kw'    => 'prom limo hire quote',
+		],
+		'quote' => [
+			'title' => 'Get a Free Car Hire Quote | Just Phantoms',
+			'desc'  => 'Request your free luxury car hire quote. Fast response, price-match guarantee and 5-star chauffeur service across Lancashire, Yorkshire and the North.',
+			'kw'    => 'luxury car hire quote',
+		],
+		'phantom' => [
+			'title' => 'Rolls Royce Phantom Hire | Wedding & Prom Car | Just Phantoms',
+			'desc'  => 'Hire a chauffeur-driven Rolls Royce Phantom for your Wedding, Prom or VIP event. Snow White with Starlight Headliner. Serving Lancashire, Yorkshire and beyond. From £250.',
+			'kw'    => 'Rolls Royce Phantom hire Lancashire',
+		],
+		'cayenne-limo' => [
+			'title' => 'Porsche Cayenne Limo Hire | Prom Limo | Just Phantoms',
+			'desc'  => '8-passenger Porsche Cayenne stretch Limousine for hire. Perfect for Proms, Weddings and parties across Lancashire and Yorkshire. Luxury limo from £250.',
+			'kw'    => 'Porsche Cayenne Limo hire',
+		],
+		'bentley-chrysler-limo' => [
+			'title' => 'Baby Bentley Chrysler Limo Hire | Stretch Limo | Just Phantoms',
+			'desc'  => 'Hire the iconic Baby Bentley Chrysler stretch Limousine. Seats 8 passengers for Proms, Weddings and parties across the North of England. From £195.',
+			'kw'    => 'Baby Bentley limo hire',
+		],
+		'mustang-gt500' => [
+			'title' => 'Ford Mustang GT500 Hire | Prom & Music Video Car | Just Phantoms',
+			'desc'  => 'Limited edition Ford Mustang GT500 for hire — supercharged V8 Prom car also available for music videos and photoshoots across Lancashire and Yorkshire.',
+			'kw'    => 'Ford Mustang GT500 hire prom',
+		],
+		'range-rover' => [
+			'title' => 'Range Rover Executive LWB SVO Hire | Just Phantoms',
+			'desc'  => 'Hire the Range Rover Executive Long-Wheelbase SVO for Weddings, corporate events and VIP transfers. Commanding luxury across the North of England.',
+			'kw'    => 'Range Rover hire Lancashire',
+		],
+		'vintage' => [
+			'title' => '1930s Vintage Classic Car Hire | Wedding Car | Just Phantoms',
+			'desc'  => 'Hire a genuine 1930s Vintage Classic car for your Wedding. Timeless period styling for couples seeking classic elegance across Lancashire and Yorkshire.',
+			'kw'    => '1930s vintage car hire wedding',
+		],
+		'regent-landaulette' => [
+			'title' => 'Regent Landaulette Convertible Hire | Wedding Car | Just Phantoms',
+			'desc'  => 'Open-top Regent Landaulette Convertible hire for summer Weddings. Classic coachwork, modern reliability and unforgettable photos across Lancashire and Yorkshire.',
+			'kw'    => 'Regent Landaulette hire',
+		],
+	];
+	foreach ( $map as $tpl => $data ) {
+		if ( jp_is_page_template( $tpl ) ) return $data;
+	}
+	if ( jp_is_page_template( 'location-page' ) ) {
+		$loc = get_field( 'lp_location_name' ) ?: get_the_title();
+		$cty = get_field( 'lp_county' )         ?: 'Lancashire';
+		$svc = jp_loc_service_label();
+		return [
+			'title' => "{$svc} {$loc} | Just Phantoms",
+			'desc'  => "Just Phantoms provides {$svc} in {$loc}, {$cty}. 5-star rated chauffeur-driven Rolls Royce, stretch Limousines and vintage classics. Price-match guaranteed. Book today.",
+			'kw'    => strtolower( "{$svc} {$loc}" ),
+		];
+	}
+	return [];
+}
+
+/* ── Yoast: inject SEO title when no custom title is set on the page ── */
+add_filter( 'wpseo_title', function( $title ) {
+	if ( get_post_meta( get_the_ID(), '_yoast_wpseo_title', true ) ) return $title;
+	$data = jp_seo_data();
+	return $data['title'] ?? $title;
+} );
+
+/* ── Yoast: inject meta description when none is set on the page ── */
+add_filter( 'wpseo_metadesc', function( $desc ) {
+	if ( get_post_meta( get_the_ID(), '_yoast_wpseo_metadesc', true ) ) return $desc;
+	$data = jp_seo_data();
+	return $data['desc'] ?? $desc;
+} );
+
+/* ── Yoast: fallback Open Graph image ── */
+add_filter( 'wpseo_opengraph_image', function( $img ) {
+	if ( $img ) return $img;
+	return get_template_directory_uri() . '/assets/images/fleet/rolls-royce-phantom/Rolls%20Royce%20Phantom.jpg';
+}, 20 );
+
+/* ── JSON-LD Schema markup ── */
+add_action( 'wp_head', 'jp_schema_output', 99 );
+function jp_schema_output(): void {
+	$schemas = [];
+
+	// ── LocalBusiness — output on every page ──
+	$schemas[] = [
+		'@context'        => 'https://schema.org',
+		'@type'           => [ 'LocalBusiness', 'AutoRental' ],
+		'@id'             => home_url( '/#business' ),
+		'name'            => 'Just Phantoms',
+		'description'     => '5-star rated luxury Wedding and Prom chauffeur car hire across Lancashire, Yorkshire, Cumbria, Derbyshire and Nottinghamshire.',
+		'url'             => home_url( '/' ),
+		'telephone'       => '+447504040407',
+		'email'           => 'info@justphantoms.co.uk',
+		'priceRange'      => '££',
+		'logo'            => get_template_directory_uri() . '/assets/images/logos/nav-logo.png',
+		'image'           => get_template_directory_uri() . '/assets/images/fleet/rolls-royce-phantom/Rolls Royce Phantom.jpg',
+		'address'         => [
+			'@type'          => 'PostalAddress',
+			'addressRegion'  => 'Lancashire',
+			'addressCountry' => 'GB',
+		],
+		'areaServed' => [
+			[ '@type' => 'AdministrativeArea', 'name' => 'Lancashire' ],
+			[ '@type' => 'AdministrativeArea', 'name' => 'Yorkshire' ],
+			[ '@type' => 'AdministrativeArea', 'name' => 'Cumbria' ],
+			[ '@type' => 'AdministrativeArea', 'name' => 'Derbyshire' ],
+			[ '@type' => 'AdministrativeArea', 'name' => 'Nottinghamshire' ],
+		],
+		'sameAs' => [
+			'https://www.tiktok.com/@justphantoms',
+			'https://www.instagram.com/justphantoms',
+		],
+		'aggregateRating' => [
+			'@type'       => 'AggregateRating',
+			'ratingValue' => '4.9',
+			'reviewCount' => '500',
+			'bestRating'  => '5',
+			'worstRating' => '1',
+		],
+	];
+
+	// ── Vehicle schemas ──
+	$vehicle_map = [
+		'phantom' => [
+			'name'  => 'Rolls Royce Phantom', 'brand' => 'Rolls-Royce', 'model' => 'Phantom',
+			'seats' => 4, 'color' => 'Snow White',
+			'desc'  => 'Chauffeur-driven Rolls Royce Phantom hire for Weddings, Proms and VIP events. Features Starlight Headliner, V12 engine and handcrafted British interior.',
+		],
+		'cayenne-limo' => [
+			'name'  => 'Porsche Cayenne Limo', 'brand' => 'Porsche', 'model' => 'Cayenne Limousine',
+			'seats' => 8,
+			'desc'  => '8-passenger Porsche Cayenne stretch Limousine hire for Proms, Weddings and parties.',
+		],
+		'bentley-chrysler-limo' => [
+			'name'  => 'Baby Bentley Chrysler Limo', 'brand' => 'Chrysler', 'model' => 'Baby Bentley Limousine',
+			'seats' => 8,
+			'desc'  => 'Baby Bentley Chrysler stretch Limousine hire for Proms, Weddings and special occasions.',
+		],
+		'mustang-gt500' => [
+			'name'  => 'Limited Edition Ford Mustang GT500', 'brand' => 'Ford', 'model' => 'Mustang GT500',
+			'seats' => 3,
+			'desc'  => 'Limited edition Ford Mustang GT500 hire for Proms, music videos and photoshoots.',
+		],
+		'range-rover' => [
+			'name'  => 'Range Rover Executive LWB SVO', 'brand' => 'Land Rover', 'model' => 'Range Rover LWB SVO',
+			'seats' => 4,
+			'desc'  => 'Range Rover Executive Long-Wheelbase SVO hire for Weddings, corporate and VIP events.',
+		],
+		'vintage' => [
+			'name'  => '1930s Vintage Classic Car', 'brand' => 'Vintage', 'model' => '1930s Classic',
+			'seats' => 3,
+			'desc'  => 'Genuine 1930s Vintage Classic car hire for Weddings and special occasions.',
+		],
+		'regent-landaulette' => [
+			'name'  => 'Regent Landaulette Convertible', 'brand' => 'Regent', 'model' => 'Landaulette Convertible',
+			'seats' => 6,
+			'desc'  => 'Regent Landaulette open-top Convertible hire for summer Weddings and special occasions.',
+		],
+	];
+	foreach ( $vehicle_map as $tpl => $v ) {
+		if ( jp_is_page_template( $tpl ) ) {
+			$schema = [
+				'@context'               => 'https://schema.org',
+				'@type'                  => 'Vehicle',
+				'name'                   => $v['name'],
+				'brand'                  => [ '@type' => 'Brand', 'name' => $v['brand'] ],
+				'model'                  => $v['model'],
+				'vehicleSeatingCapacity' => $v['seats'],
+				'description'            => $v['desc'],
+				'offers'                 => [
+					'@type'         => 'Offer',
+					'seller'        => [ '@type' => 'Organization', 'name' => 'Just Phantoms' ],
+					'areaServed'    => 'North of England',
+					'availability'  => 'https://schema.org/InStock',
+					'priceCurrency' => 'GBP',
+				],
+			];
+			if ( ! empty( $v['color'] ) ) $schema['color'] = $v['color'];
+			$schemas[] = $schema;
+			break;
+		}
+	}
+
+	// ── FAQPage schema ──
+	if ( jp_is_page_template( 'faq' ) ) {
+		$schemas[] = [
+			'@context'   => 'https://schema.org',
+			'@type'      => 'FAQPage',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'How far in advance should I book?',
+				  'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'We recommend booking 2-4 weeks in advance for peak dates such as summer weekends and Prom season (April-July). Last-minute bookings can often be accommodated.' ] ],
+				[ '@type' => 'Question', 'name' => 'What areas do you cover?',
+				  'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Our core coverage includes Lancashire, Yorkshire, Cumbria, Derbyshire and Nottinghamshire — including Preston, Blackburn, Burnley, Leeds, Bradford, York, Sheffield, Carlisle, Derby and Nottingham.' ] ],
+				[ '@type' => 'Question', 'name' => 'What is included in the hire price?',
+				  'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Every hire includes a professional uniformed chauffeur, freshly valeted vehicle, complimentary bottled water and 15-minute early arrival. Wedding bookings include ribbon decoration.' ] ],
+				[ '@type' => 'Question', 'name' => 'Do you offer a price-match guarantee?',
+				  'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Yes. We will beat any like-for-like quote from a VAT-registered company by 10%, guaranteed within 7 days of your booking.' ] ],
+				[ '@type' => 'Question', 'name' => 'Can I make extra stops or adjust timings on the day?',
+				  'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Yes. Minor timing adjustments and extra stops can usually be accommodated on the day. For major changes we recommend discussing these at booking for transparent pricing.' ] ],
+			],
+		];
+	}
+
+	// ── AggregateRating on Reviews page ──
+	if ( jp_is_page_template( 'reviews' ) ) {
+		$schemas[] = [
+			'@context'        => 'https://schema.org',
+			'@type'           => 'LocalBusiness',
+			'name'            => 'Just Phantoms',
+			'aggregateRating' => [
+				'@type'       => 'AggregateRating',
+				'ratingValue' => '4.9',
+				'reviewCount' => '500',
+				'bestRating'  => '5',
+				'worstRating' => '1',
+			],
+		];
+	}
+
+	// ── Service schema on Services page ──
+	if ( jp_is_page_template( 'services' ) ) {
+		$schemas[] = [
+			'@context'    => 'https://schema.org',
+			'@type'       => 'Service',
+			'name'        => 'Wedding & Prom Car Hire',
+			'provider'    => [ '@type' => 'LocalBusiness', 'name' => 'Just Phantoms', 'url' => home_url( '/' ) ],
+			'areaServed'  => 'Lancashire, Yorkshire, Cumbria, Derbyshire, Nottinghamshire',
+			'serviceType' => [ 'Wedding Car Hire', 'Prom Limousine Hire', 'Chauffeur Service', 'Airport Transfer', 'VIP Executive Transfer' ],
+			'description' => 'Chauffeur-driven Wedding, Prom and VIP car hire across the North of England.',
+		];
+	}
+
+	// ── Location page Service schema ──
+	if ( jp_is_page_template( 'location-page' ) ) {
+		$loc = get_field( 'lp_location_name' ) ?: get_the_title();
+		$cty = get_field( 'lp_county' )         ?: 'Lancashire';
+		$svc = jp_loc_service_label();
+		$schemas[] = [
+			'@context'    => 'https://schema.org',
+			'@type'       => 'Service',
+			'name'        => "{$svc} {$loc}",
+			'provider'    => [ '@type' => 'LocalBusiness', 'name' => 'Just Phantoms', 'url' => home_url( '/' ) ],
+			'areaServed'  => [ '@type' => 'City', 'name' => $loc, 'containedInPlace' => [ '@type' => 'AdministrativeArea', 'name' => $cty ] ],
+			'serviceType' => $svc,
+			'url'         => get_permalink(),
+		];
+	}
+
+	// ── BreadcrumbList ──
+	$crumbs = [ [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url( '/' ) ] ];
+	if ( jp_is_vehicle_page() ) {
+		$crumbs[] = [ '@type' => 'ListItem', 'position' => 2, 'name' => 'Our Fleet', 'item' => home_url( '/our-fleet/' ) ];
+		$crumbs[] = [ '@type' => 'ListItem', 'position' => 3, 'name' => get_the_title(), 'item' => get_permalink() ];
+	} elseif ( jp_is_page_template( 'location-page' ) ) {
+		$crumbs[] = [ '@type' => 'ListItem', 'position' => 2, 'name' => 'Locations', 'item' => home_url( '/locations/' ) ];
+		$crumbs[] = [ '@type' => 'ListItem', 'position' => 3, 'name' => get_the_title(), 'item' => get_permalink() ];
+	} elseif ( ! is_front_page() && is_page() ) {
+		$crumbs[] = [ '@type' => 'ListItem', 'position' => 2, 'name' => get_the_title(), 'item' => get_permalink() ];
+	}
+	if ( count( $crumbs ) > 1 ) {
+		$schemas[] = [
+			'@context'        => 'https://schema.org',
+			'@type'           => 'BreadcrumbList',
+			'itemListElement' => $crumbs,
+		];
+	}
+
+	// Output all schemas
+	foreach ( $schemas as $schema ) {
+		echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+	}
+}
