@@ -362,26 +362,116 @@ function jp_handle_quote_submission() {
 		update_post_meta( $post_id, '_jp_email_sent',  'pending' );
 	}
 
-	// Build email body.
-	$subject = sprintf( '[Just Phantoms] New %s Quote Request from %s', ucfirst( $form_type ), $name );
-	$body    = "New quote enquiry received:\n\n";
-	$body   .= "Name:              {$name}\n";
-	$body   .= "Email:             {$email}\n";
-	$body   .= "Phone:             {$phone}\n";
-	$body   .= "Vehicle:           {$vehicle}\n";
-	$body   .= "Event Date:        {$event_date}\n";
-	$body   .= "Collection Time:   {$pickup_time}\n";
-	$body   .= "Pickup Address:    {$pickup}\n";
-	$body   .= "Pickup Postcode:   {$pickup_postcode}\n";
-	$body   .= "Destination:       {$destination}\n";
-	$body   .= "Dest. Postcode:    {$dest_postcode}\n";
-	$body   .= "Return Address:    {$return_address}\n";
-	$body   .= "Return Postcode:   {$return_postcode}\n";
-	$body   .= "Notes:             {$notes}\n";
-	$body   .= "\nSubmitted: " . current_time( 'mysql' );
+	// Build branded HTML email body.
+	$subject      = sprintf( 'New %s Quote Request — %s', ucfirst( $form_type ), $name );
+	$form_label   = ucfirst( $form_type );
+	$submitted_at = current_time( 'mysql' );
+
+	$row = function( $label, $value ) {
+		if ( empty( trim( $value ) ) ) return '';
+		return '<tr><td style="padding:8px 16px;font-weight:600;color:#555;width:170px;vertical-align:top;white-space:nowrap;">' . esc_html( $label ) . '</td><td style="padding:8px 16px;color:#222;">' . esc_html( $value ) . '</td></tr>';
+	};
+
+	$body = '<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:30px 0;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);">
+
+      <!-- Header -->
+      <tr>
+        <td style="background:#1a1a1a;padding:28px 32px;text-align:center;">
+          <p style="margin:0;font-size:22px;font-weight:700;color:#c9a96e;letter-spacing:2px;text-transform:uppercase;">Just Phantoms</p>
+          <p style="margin:6px 0 0;font-size:13px;color:#aaa;letter-spacing:1px;">Luxury Chauffeur Car Hire</p>
+        </td>
+      </tr>
+
+      <!-- Banner -->
+      <tr>
+        <td style="background:#c9a96e;padding:14px 32px;text-align:center;">
+          <p style="margin:0;font-size:15px;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:1px;">New ' . esc_html( $form_label ) . ' Quote Request</p>
+        </td>
+      </tr>
+
+      <!-- Intro -->
+      <tr>
+        <td style="padding:24px 32px 8px;">
+          <p style="margin:0;font-size:15px;color:#333;">A new enquiry has been submitted via the website. Details are below.</p>
+        </td>
+      </tr>
+
+      <!-- Customer Details -->
+      <tr>
+        <td style="padding:8px 32px 0;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Customer</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
+            ' . $row( 'Name', $name )
+            . $row( 'Email', $email )
+            . $row( 'Phone', $phone ) . '
+          </table>
+        </td>
+      </tr>
+
+      <!-- Booking Details -->
+      <tr>
+        <td style="padding:20px 32px 0;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Booking Details</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
+            ' . $row( 'Vehicle', $vehicle )
+            . $row( 'Event Date', $event_date )
+            . $row( 'Collection Time', $pickup_time ) . '
+          </table>
+        </td>
+      </tr>
+
+      <!-- Journey Details -->
+      <tr>
+        <td style="padding:20px 32px 0;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Journey</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
+            ' . $row( 'Pickup Address', $pickup )
+            . $row( 'Pickup Postcode', $pickup_postcode )
+            . $row( 'Destination', $destination )
+            . $row( 'Dest. Postcode', $dest_postcode )
+            . $row( 'Return Address', $return_address )
+            . $row( 'Return Postcode', $return_postcode ) . '
+          </table>
+        </td>
+      </tr>
+
+      <!-- Notes -->
+      ' . ( ! empty( trim( $notes ) ) ? '
+      <tr>
+        <td style="padding:20px 32px 0;">
+          <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Additional Notes</p>
+          <div style="border:1px solid #eee;border-radius:6px;padding:12px 16px;color:#333;font-size:14px;">' . nl2br( esc_html( $notes ) ) . '</div>
+        </td>
+      </tr>' : '' ) . '
+
+      <!-- CTA -->
+      <tr>
+        <td style="padding:24px 32px;">
+          <a href="mailto:' . esc_attr( $email ) . '" style="display:inline-block;background:#c9a96e;color:#1a1a1a;text-decoration:none;font-weight:700;font-size:14px;padding:12px 28px;border-radius:4px;letter-spacing:.5px;">Reply to ' . esc_html( $name ) . '</a>
+        </td>
+      </tr>
+
+      <!-- Footer -->
+      <tr>
+        <td style="background:#f9f9f9;border-top:1px solid #eee;padding:16px 32px;text-align:center;">
+          <p style="margin:0;font-size:12px;color:#999;">Submitted: ' . esc_html( $submitted_at ) . ' &nbsp;|&nbsp; justphantoms.co.uk &nbsp;|&nbsp; 07504 040 407</p>
+        </td>
+      </tr>
+
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>';
 
 	$headers = array(
-		'Content-Type: text/plain; charset=UTF-8',
+		'Content-Type: text/html; charset=UTF-8',
 		'Reply-To: ' . $name . ' <' . $email . '>',
 		'Cc: naiyaab@nkds.co.uk',
 	);
@@ -393,11 +483,41 @@ function jp_handle_quote_submission() {
 		update_post_meta( $post_id, '_jp_email_sent', $sent ? 'yes' : 'no' );
 	}
 
-	// Also send confirmation to enquirer.
+	// Branded confirmation to enquirer.
 	if ( $sent ) {
 		$confirm_subject = 'Just Phantoms — We\'ve received your enquiry!';
-		$confirm_body    = "Hi {$name},\n\nThank you for your enquiry! We've received your quote request and will be in touch within a few hours.\n\nIf you need to speak to us urgently, please call: 07504 040 407\n\nKind regards,\nThe Just Phantoms Team";
-		wp_mail( $email, $confirm_subject, $confirm_body );
+		$confirm_body    = '<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:30px 0;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);">
+      <tr>
+        <td style="background:#1a1a1a;padding:28px 32px;text-align:center;">
+          <p style="margin:0;font-size:22px;font-weight:700;color:#c9a96e;letter-spacing:2px;text-transform:uppercase;">Just Phantoms</p>
+          <p style="margin:6px 0 0;font-size:13px;color:#aaa;letter-spacing:1px;">Luxury Chauffeur Car Hire</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:32px;">
+          <p style="margin:0 0 16px;font-size:16px;color:#222;">Hi ' . esc_html( $name ) . ',</p>
+          <p style="margin:0 0 16px;font-size:15px;color:#444;line-height:1.6;">Thank you for your enquiry! We\'ve received your quote request and will be in touch within a few hours.</p>
+          <p style="margin:0 0 24px;font-size:15px;color:#444;line-height:1.6;">If you need to speak to us urgently, please don\'t hesitate to call us directly.</p>
+          <a href="tel:07504040407" style="display:inline-block;background:#c9a96e;color:#1a1a1a;text-decoration:none;font-weight:700;font-size:14px;padding:12px 28px;border-radius:4px;">Call 07504 040 407</a>
+        </td>
+      </tr>
+      <tr>
+        <td style="background:#f9f9f9;border-top:1px solid #eee;padding:16px 32px;text-align:center;">
+          <p style="margin:0;font-size:12px;color:#999;">Just Phantoms &nbsp;|&nbsp; justphantoms.co.uk &nbsp;|&nbsp; 07504 040 407</p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>';
+		wp_mail( $email, $confirm_subject, $confirm_body, array( 'Content-Type: text/html; charset=UTF-8' ) );
 	}
 
 	if ( $sent ) {
