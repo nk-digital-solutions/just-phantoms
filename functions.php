@@ -663,8 +663,8 @@ function jp_seo_data(): array {
 		$cty = get_field( 'lp_county' )         ?: 'Lancashire';
 		$svc = jp_loc_service_label();
 		return [
-			'title' => "{$svc} {$loc} | Just Phantoms",
-			'desc'  => "Just Phantoms provides {$svc} in {$loc}, {$cty}. 5-star rated chauffeur-driven Rolls Royce, stretch Limousines and vintage classics. Price-match guaranteed. Book today.",
+			'title' => "{$svc} {$loc}, {$cty} | Just Phantoms",
+			'desc'  => "Book {$svc} in {$loc}, {$cty} with Just Phantoms. 5-star rated, DBS-checked chauffeurs, price-match guaranteed. Call 07504 040 407.",
 			'kw'    => strtolower( "{$svc} {$loc}" ),
 		];
 	}
@@ -854,10 +854,17 @@ function jp_schema_output(): void {
 			'@context'    => 'https://schema.org',
 			'@type'       => 'Service',
 			'name'        => "{$svc} {$loc}",
-			'provider'    => [ '@type' => 'LocalBusiness', 'name' => 'Just Phantoms', 'url' => home_url( '/' ) ],
+			'description' => "Book {$svc} in {$loc}, {$cty} with Just Phantoms. 5-star rated, DBS-checked chauffeurs, price-match guaranteed.",
+			'provider'    => [ '@type' => 'LocalBusiness', 'name' => 'Just Phantoms', 'url' => home_url( '/' ), 'telephone' => '+447504040407' ],
 			'areaServed'  => [ '@type' => 'City', 'name' => $loc, 'containedInPlace' => [ '@type' => 'AdministrativeArea', 'name' => $cty ] ],
 			'serviceType' => $svc,
 			'url'         => get_permalink(),
+			'offers'      => [
+				'@type'         => 'Offer',
+				'priceCurrency' => 'GBP',
+				'availability'  => 'https://schema.org/InStock',
+				'areaServed'    => $loc . ', ' . $cty,
+			],
 		];
 	}
 
