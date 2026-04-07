@@ -109,7 +109,7 @@ get_header(); ?>
               <label for="pickupSearch">Pick up Address * <span style="font-size:.8rem;font-weight:400;color:var(--muted)">(Please include door number)</span></label>
               <div class="lookup-container" id="pickupLookup">
                 <div class="input-wrapper">
-                  <input type="text" id="pickupSearch" name="pickupSearch" placeholder="Start typing address or postcode..." autocomplete="off">
+                  <input type="text" id="pickupSearch" name="pickupSearch" placeholder="Start typing address or postcode..." autocomplete="off" required>
                   <button type="button" class="btn-input-action" data-entry="pickup">Enter Manually</button>
                 </div>
                 <input type="hidden" name="pickupPostcodeAuto" id="pickupPostcodeAuto">
@@ -131,7 +131,7 @@ get_header(); ?>
               <label for="destSearch">Wedding Venue / Final Destination *</label>
               <div class="lookup-container" id="destLookup">
                 <div class="input-wrapper">
-                  <input type="text" id="destSearch" name="destSearch" placeholder="Start typing address or postcode..." autocomplete="off">
+                  <input type="text" id="destSearch" name="destSearch" placeholder="Start typing address or postcode..." autocomplete="off" required>
                   <button type="button" class="btn-input-action" data-entry="dest">Enter Manually</button>
                 </div>
                 <input type="hidden" name="destPostcodeAuto" id="destPostcodeAuto">
