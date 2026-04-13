@@ -62,7 +62,7 @@ get_header(); ?>
                 <option value="VIP &amp; Executive Transfer">VIP &amp; Executive Transfer</option>
                 <option value="Airport Transfers">Airport Transfers</option>
                 <option value="Special Occasions">Special Occasions</option>
-                <option value="Self Drive Options">Self Drive Options</option>
+                <option value="Birthdays">Birthdays</option>
                 <option value="Corporate Events">Corporate Events</option>
               </select>
             </div>
