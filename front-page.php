@@ -41,7 +41,7 @@ get_header(); ?>
       <div class="form-actions form-actions-grid">
         <a class="btn primary" href="<?php echo esc_url( home_url( '/wedding-quote/' ) ); ?>">Get Wedding Quote</a>
         <a class="btn btn-prom-quote" href="<?php echo esc_url( home_url( '/prom-quote/' ) ); ?>">Get Prom Quote</a>
-        <a class="btn btn-general-quote" href="<?php echo esc_url( home_url( '/quote/' ) ); ?>">General Quote</a>
+        <a class="btn btn-general-quote" href="https://justphantoms.co.uk/get-quote/">General Quote</a>
         <a class="btn btn-hero-tel" href="tel:+447504040407">Call 07504 040 407</a>
       </div>
     </div>
