@@ -329,6 +329,7 @@ function jp_handle_quote_submission() {
 	$name             = sanitize_text_field( $_POST['fullName']       ?? '' );
 	$email            = sanitize_email(      $_POST['email']          ?? '' );
 	$phone            = sanitize_text_field( $_POST['phone']          ?? '' );
+	$event_service    = sanitize_text_field( $_POST['eventService']   ?? '' );
 	$vehicle          = sanitize_text_field( $_POST['vehicleType']    ?? '' );
 	$event_date       = sanitize_text_field( $_POST['eventDate']      ?? '' );
 	$pickup_hour      = sanitize_text_field( $_POST['pickupHour']     ?? '' );
@@ -372,6 +373,7 @@ function jp_handle_quote_submission() {
 
 	if ( $post_id && ! is_wp_error( $post_id ) ) {
 		update_post_meta( $post_id, '_jp_form_type',        $form_type );
+		update_post_meta( $post_id, '_jp_event_service',    $event_service );
 		update_post_meta( $post_id, '_jp_email',             $email );
 		update_post_meta( $post_id, '_jp_phone',             $phone );
 		update_post_meta( $post_id, '_jp_vehicle',           $vehicle );
@@ -447,6 +449,7 @@ function jp_handle_quote_submission() {
           <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Booking Details</p>
           <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
             ' . $row( 'Vehicle', $vehicle )
+            . $row( 'Event Service', $event_service )
             . $row( 'Event Date', $event_date )
             . $row( 'Collection Time', $pickup_time ) . '
           </table>
@@ -553,6 +556,7 @@ function jp_handle_quote_submission() {
           <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#c9a96e;text-transform:uppercase;letter-spacing:1px;">Booking Details</p>
           <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
             ' . $row( 'Vehicle', $vehicle )
+            . $row( 'Event Service', $event_service )
             . $row( 'Event Date', $event_date )
             . $row( 'Collection Time', $pickup_time ) . '
           </table>

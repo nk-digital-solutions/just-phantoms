@@ -10,8 +10,8 @@ get_header(); ?>
 
 <section class="page-hero">
   <div class="container">
-    <h1>Get Your Wedding or Prom Quote</h1>
-    <p>Tell us your date, venues and preferred vehicles. We provide fast, transparent pricing for Wedding and Prom car and Limousine hire.</p>
+    <h1>Get Your Event Quote</h1>
+    <p>Tell us your event, date, venues and preferred vehicle. We provide fast, transparent pricing across all of our services.</p>
   </div>
 </section>
 
@@ -46,6 +46,25 @@ get_header(); ?>
                 <label for="phone">Phone *</label>
                 <input type="tel" id="phone" name="phone" placeholder="07123 456789" required>
               </div>
+            </div>
+          </div>
+
+          <!-- Service Type -->
+          <div class="form-section">
+            <h3>Service Type</h3>
+            <div class="form-group">
+              <label for="eventService">Type of Service / Event *</label>
+              <select id="eventService" name="eventService" required>
+                <option value="">Select a service...</option>
+                <option value="Wedding Transport">Wedding Transport</option>
+                <option value="Prom Transport">Prom Transport</option>
+                <option value="Music Videos &amp; Film">Music Videos &amp; Film</option>
+                <option value="VIP &amp; Executive Transfer">VIP &amp; Executive Transfer</option>
+                <option value="Airport Transfers">Airport Transfers</option>
+                <option value="Special Occasions">Special Occasions</option>
+                <option value="Self Drive Options">Self Drive Options</option>
+                <option value="Corporate Events">Corporate Events</option>
+              </select>
             </div>
           </div>
 
