@@ -110,6 +110,12 @@
               if (place.name && fullAddress.indexOf(place.name) === -1) {
                 fullAddress = place.name + ', ' + fullAddress;
               }
+              if (postcode && fullAddress.indexOf(postcode) === -1) {
+                fullAddress = fullAddress.replace(/, UK$/, ', ' + postcode + ', UK');
+                if (fullAddress.indexOf(postcode) === -1) {
+                  fullAddress = fullAddress + ', ' + postcode;
+                }
+              }
               stopInput.value = fullAddress;
               var pcField = document.getElementById(pcId);
               if (pcField) pcField.value = postcode;
@@ -207,6 +213,14 @@
         var fullAddress = place.formatted_address || '';
         if (place.name && fullAddress.indexOf(place.name) === -1) {
           fullAddress = place.name + ', ' + fullAddress;
+        }
+
+        // Ensure postcode is visible in the address field
+        if (postcode && fullAddress.indexOf(postcode) === -1) {
+          fullAddress = fullAddress.replace(/, UK$/, ', ' + postcode + ', UK');
+          if (fullAddress.indexOf(postcode) === -1) {
+            fullAddress = fullAddress + ', ' + postcode;
+          }
         }
 
         // Set the search field to the full address

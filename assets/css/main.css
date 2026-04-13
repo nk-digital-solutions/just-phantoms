@@ -58,6 +58,8 @@ h1, h2, h3, h4, h5, h6 { color: var(--gold); }
 .btn-gold-cta           { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #111111; }
 .btn-prom-quote         { background: #ffffff; color: #111111; border-radius: 999px; font-weight: 600; transition: .2s ease; border: none; cursor: pointer; }
 .btn-prom-quote:hover   { background: #f0f0f0; color: #111111; }
+.btn-general-quote      { background: #111111; color: var(--gold); border-radius: 999px; font-weight: 600; transition: .2s ease; border: none; cursor: pointer; }
+.btn-general-quote:hover{ background: #222222; color: var(--gold-2); }
 .btn-hero-tel           { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); }
 .btn-hero-tel:hover     { background: rgba(194,163,59,0.08); color: var(--gold-2); }
 
