@@ -38,7 +38,7 @@ get_header(); ?>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Complimentary touches: bottled water, drinks &amp; bow tie ribbons on request.
       </div>
-      <div class="form-actions">
+      <div class="form-actions form-actions-grid">
         <a class="btn primary" href="<?php echo esc_url( home_url( '/wedding-quote/' ) ); ?>">Get Wedding Quote</a>
         <a class="btn btn-prom-quote" href="<?php echo esc_url( home_url( '/prom-quote/' ) ); ?>">Get Prom Quote</a>
         <a class="btn btn-general-quote" href="<?php echo esc_url( home_url( '/quote/' ) ); ?>">General Quote</a>
