@@ -283,7 +283,7 @@ add_action( 'add_meta_boxes', function() {
 			'_jp_return_address'   => 'Return Address',
 			'_jp_return_postcode'  => 'Return Postcode',
 			'_jp_return_time'      => 'Return Time',
-			'_jp_stops'            => 'Additional Stops',
+			'_jp_stops'            => 'Additional Information / Stops',
 			'_jp_notes'            => 'Notes',
 			'_jp_email_sent'       => 'Email Sent',
 		);
@@ -463,7 +463,7 @@ function jp_handle_quote_submission() {
             . $row( 'Return Address', $return_address )
             . $row( 'Return Postcode', $return_postcode )
             . $row( 'Return Time', $return_time )
-            . $row( 'Additional Stops', $stops_text ) . '
+            . $row( 'Additional Information / Stops', $stops_text ) . '
           </table>
         </td>
       </tr>
@@ -565,7 +565,7 @@ function jp_handle_quote_submission() {
           <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:6px;overflow:hidden;">
             ' . $row( 'Pickup', $pickup )
             . $row( 'Destination', $destination )
-            . $row( 'Additional Stops', $stops_text )
+            . $row( 'Additional Information / Stops', $stops_text )
             . $row( 'Return Address', $return_address )
             . $row( 'Return Time', $return_time ) . '
           </table>

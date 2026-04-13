@@ -206,9 +206,9 @@ get_header(); ?>
               </div>
             </div>
 
-            <!-- Additional Stops -->
+            <!-- Additional Information / Stops -->
             <div class="form-group" style="margin-top:1rem">
-              <label for="additionalStops">Additional Stops</label>
+              <label for="additionalStops">Additional Information / Stops</label>
               <textarea id="additionalStops" name="additionalStops" rows="2" placeholder="e.g. Pick up Mum at 12 Church Street BB1 1AA, then drop at hotel before venue..."></textarea>
             </div>
 
