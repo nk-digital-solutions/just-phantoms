@@ -206,25 +206,27 @@ add_action( 'init', 'jp_register_quote_cpt' );
 /* Admin list columns for Quote Submissions */
 add_filter( 'manage_jp_quote_posts_columns', function( $cols ) {
 	return array(
-		'cb'         => $cols['cb'],
-		'title'      => 'Name',
-		'jp_email'   => 'Email',
-		'jp_phone'   => 'Phone',
-		'jp_type'    => 'Type',
-		'jp_vehicle' => 'Vehicle',
-		'jp_date'    => 'Event Date',
-		'jp_email_ok'=> 'Email Sent',
-		'date'       => 'Submitted',
+		'cb'          => $cols['cb'],
+		'title'       => 'Name',
+		'jp_email'    => 'Email',
+		'jp_phone'    => 'Phone',
+		'jp_type'     => 'Type',
+		'jp_service'  => 'Service / Event',
+		'jp_vehicle'  => 'Vehicle',
+		'jp_date'     => 'Event Date',
+		'jp_email_ok' => 'Email Sent',
+		'date'        => 'Submitted',
 	);
 } );
 add_action( 'manage_jp_quote_posts_custom_column', function( $col, $post_id ) {
 	$map = array(
-		'jp_email'   => '_jp_email',
-		'jp_phone'   => '_jp_phone',
-		'jp_type'    => '_jp_form_type',
-		'jp_vehicle' => '_jp_vehicle',
-		'jp_date'    => '_jp_event_date',
-		'jp_email_ok'=> '_jp_email_sent',
+		'jp_email'    => '_jp_email',
+		'jp_phone'    => '_jp_phone',
+		'jp_type'     => '_jp_form_type',
+		'jp_service'  => '_jp_event_service',
+		'jp_vehicle'  => '_jp_vehicle',
+		'jp_date'     => '_jp_event_date',
+		'jp_email_ok' => '_jp_email_sent',
 	);
 	if ( isset( $map[ $col ] ) ) {
 		$val = get_post_meta( $post_id, $map[ $col ], true );
@@ -268,6 +270,7 @@ add_action( 'add_meta_boxes', function() {
 	add_meta_box( 'jp_quote_details', 'Submission Details', function( $post ) {
 		$fields = array(
 			'_jp_form_type'        => 'Quote Type',
+			'_jp_event_service'    => 'Service / Event',
 			'_jp_email'            => 'Email',
 			'_jp_phone'            => 'Phone',
 			'_jp_vehicle'          => 'Vehicle',
