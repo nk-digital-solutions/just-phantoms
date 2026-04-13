@@ -151,6 +151,14 @@ get_header(); ?>
 
           </div>
 
+          <!-- Additional Stops -->
+          <div class="form-section">
+            <div class="form-group">
+              <label for="additionalStops">Additional Stops</label>
+              <textarea id="additionalStops" name="additionalStops" rows="2" placeholder="e.g. Picking up friends at 5 High Street BB2 2BB before the venue..."></textarea>
+            </div>
+          </div>
+
           <div class="form-actions">
             <button type="submit" class="btn primary large" style="width:100%">Get Prom Quote</button>
             <p class="form-note">We respond within 24 hours during business hours. No payment required at this stage.</p>

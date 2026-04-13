@@ -149,25 +149,12 @@ get_header(); ?>
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="returnJourney">Return Journey?</label>
-                <select id="returnJourney" name="returnJourney">
-                  <option value="no">No</option>
-                  <option value="yes">Yes</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="stopsCount">Any Stops Required?</label>
-                <select id="stopsCount" name="stopsCount">
-                  <option value="0">No stops</option>
-                  <option value="1">1 Stop</option>
-                  <option value="2">2 Stops</option>
-                  <option value="3">3 Stops</option>
-                  <option value="4">4 Stops</option>
-                  <option value="5">5 Stops</option>
-                </select>
-              </div>
+            <div class="form-group">
+              <label for="returnJourney">Return Journey?</label>
+              <select id="returnJourney" name="returnJourney">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
             </div>
 
             <!-- Return Journey Fields -->
@@ -219,8 +206,11 @@ get_header(); ?>
               </div>
             </div>
 
-            <!-- Dynamic Stops -->
-            <div id="stopsContainer"></div>
+            <!-- Additional Stops -->
+            <div class="form-group" style="margin-top:1rem">
+              <label for="additionalStops">Additional Stops</label>
+              <textarea id="additionalStops" name="additionalStops" rows="2" placeholder="e.g. Pick up Mum at 12 Church Street BB1 1AA, then drop at hotel before venue..."></textarea>
+            </div>
 
           </div>
 

@@ -47,7 +47,7 @@ add_action( 'after_setup_theme', 'jp_theme_setup' );
  * 2. Enqueue Styles & Scripts
  * ───────────────────────────────────────── */
 function jp_enqueue_assets() {
-	$ver = '2.0.1';
+	$ver = '2.0.2';
 	$uri = get_template_directory_uri();
 
 	// Google Fonts — Poppins.
@@ -349,15 +349,7 @@ function jp_handle_quote_submission() {
 	$return_min       = sanitize_text_field( $_POST['returnMin']   ?? '' );
 	$return_ampm      = sanitize_text_field( $_POST['returnAmPm']  ?? '' );
 	$return_time      = ( $return_hour && $return_min ) ? "{$return_hour}:{$return_min} {$return_ampm}" : '';
-	$stops            = array();
-	for ( $i = 1; $i <= 5; $i++ ) {
-		$stop_addr = sanitize_textarea_field( $_POST[ 'stop' . $i ] ?? '' );
-		$stop_pc   = sanitize_text_field( $_POST[ 'stop' . $i . 'Postcode' ] ?? '' );
-		if ( $stop_addr ) {
-			$stops[] = $stop_addr . ( $stop_pc ? ' (' . $stop_pc . ')' : '' );
-		}
-	}
-	$stops_text       = implode( ' | ', $stops );
+	$stops_text       = sanitize_textarea_field( $_POST['additionalStops'] ?? '' );
 	$notes            = sanitize_textarea_field( $_POST['message']          ?? '' );
 	$form_type        = sanitize_text_field( $_POST['quoteType']      ?? 'general' );
 

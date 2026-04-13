@@ -64,68 +64,6 @@
   // ------------------------------------------------------------------
   // Dynamic stops fields
   // ------------------------------------------------------------------
-  function initStopsFields() {
-    var countSelect = document.getElementById('stopsCount');
-    var container = document.getElementById('stopsContainer');
-    if (!countSelect || !container) return;
-
-    countSelect.addEventListener('change', function () {
-      var count = parseInt(this.value, 10) || 0;
-      container.innerHTML = '';
-
-      for (var i = 1; i <= count; i++) {
-        var inputId    = 'stopSearch' + i;
-        var postcodeId = 'stopPostcodeAuto' + i;
-
-        var wrapper = document.createElement('div');
-        wrapper.className = 'form-group';
-        wrapper.style.marginTop = '1rem';
-        wrapper.innerHTML = '<label>Stop ' + i + ' Address</label>'
-          + '<div class="lookup-container"><div class="input-wrapper">'
-          + '<input type="text" id="' + inputId + '" name="stop' + i + '" placeholder="Stop ' + i + ' address..." autocomplete="off">'
-          + '</div></div>'
-          + '<input type="hidden" id="' + postcodeId + '" name="stop' + i + 'Postcode">';
-        container.appendChild(wrapper);
-
-        // Attach Google Places autocomplete if available
-        if (typeof google !== 'undefined' && google.maps && google.maps.places) {
-          (function (id, pcId) {
-            var stopInput = document.getElementById(id);
-            if (!stopInput) return;
-            var ac = new google.maps.places.Autocomplete(stopInput, {
-              componentRestrictions: { country: 'gb' },
-              types: ['establishment', 'geocode'],
-              fields: ['name', 'formatted_address', 'address_components'],
-            });
-            ac.addListener('place_changed', function () {
-              var place = ac.getPlace();
-              if (!place || !place.address_components) return;
-              var postcode = '';
-              place.address_components.forEach(function (component) {
-                if (component.types.indexOf('postal_code') !== -1) {
-                  postcode = component.long_name;
-                }
-              });
-              var fullAddress = place.formatted_address || '';
-              if (place.name && fullAddress.indexOf(place.name) === -1) {
-                fullAddress = place.name + ', ' + fullAddress;
-              }
-              if (postcode && fullAddress.indexOf(postcode) === -1) {
-                fullAddress = fullAddress.replace(/, UK$/, ', ' + postcode + ', UK');
-                if (fullAddress.indexOf(postcode) === -1) {
-                  fullAddress = fullAddress + ', ' + postcode;
-                }
-              }
-              stopInput.value = fullAddress;
-              var pcField = document.getElementById(pcId);
-              if (pcField) pcField.value = postcode;
-            });
-          })(inputId, postcodeId);
-        }
-      }
-    });
-  }
-
   // ------------------------------------------------------------------
   // Manual address entry toggle
   // ------------------------------------------------------------------
@@ -335,7 +273,6 @@
   function init() {
     initVehiclePreview();
     initReturnJourneyToggle();
-    initStopsFields();
     initManualAddressToggles();
     initModalClose();
     initFormSubmission();
