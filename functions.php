@@ -47,7 +47,7 @@ add_action( 'after_setup_theme', 'jp_theme_setup' );
  * 2. Enqueue Styles & Scripts
  * ───────────────────────────────────────── */
 function jp_enqueue_assets() {
-	$ver = '2.0.0';
+	$ver = '2.0.1';
 	$uri = get_template_directory_uri();
 
 	// Google Fonts — Poppins.
