@@ -33,7 +33,7 @@ $vehicle = array(
     'Power'         => '195 BHP',
     'Era'           => '1930s Vintage Styling with Modern Mechanics',
     'Key Features'  => 'Convertible Roof, Wool Carpets, LED Lights, Rolls Royce Emblem, Heater, Chrome Details',
-    'Colour'        => 'Classic with Chrome Accents',
+    'Colour'        => 'Classic Ivory with Gloss Black',
   ),
   'services'  => array( 'Weddings', 'Photoshoots', 'Classic Events', 'Period Productions', 'Special Occasions', 'Themed Parties' ),
   'tagline'   => 'Timeless glamour and authentic period styling &mdash; creates stunning photos and cinematic moments.',

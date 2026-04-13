@@ -24,7 +24,7 @@ $vehicle = array(
   ),
   'desc'      => array(
     'The Regent Landaulette Convertible is a stunning modern interpretation of 1930s-era vintage elegance, perfectly designed for unforgettable Wedding arrivals and special occasions across the UK. Unlike authentic vintage cars, this beautiful vehicle combines classic period styling with modern mechanics, ensuring reliability, smooth acceleration, and contemporary braking and steering for a comfortable journey.',
-    'Accommodating up to 5–6 passengers plus chauffeur, the Regent features spacious leg and headroom with large wide-opening doors ideal for Wedding attire and formal dress. The semi-convertible rear roof section can be adjusted to suit your needs, making it perfect for creating stunning Wedding photography moments. With its cream leather interior, Wilton wool carpeting, twin running boards, and spare wheel mounted in the front wing, every angle provides a picturesque setting for your special day. The ivory white coachwork with black mohair hood, walnut surrounds, and chrome features create timeless elegance that photographs beautifully. Available for chauffeur-driven Wedding hire across Preston, Blackburn, Leeds, York, Carlisle, Derby, Nottingham and surrounding towns.',
+    'Accommodating up to 5–6 passengers plus chauffeur, the Regent features spacious leg and headroom with large wide-opening doors ideal for Wedding attire and formal dress. The semi-convertible rear roof section can be adjusted to suit your needs, making it perfect for creating stunning Wedding photography moments. With its cream leather interior, Wilton wool carpeting, twin running boards, and spare wheel mounted in the front wing, every angle provides a picturesque setting for your special day. The Classic Ivory coachwork with Gloss Black hood, walnut surrounds, and chrome features create timeless elegance that photographs beautifully. Available for chauffeur-driven Wedding hire across Preston, Blackburn, Leeds, York, Carlisle, Derby, Nottingham and surrounding towns.',
   ),
   'features'  => array(
     array( 'title' => 'Semi-Convertible Roof', 'desc' => 'Adjustable rear roof section for open-air elegance on sunny days with full weather protection when needed.' ),
@@ -40,7 +40,7 @@ $vehicle = array(
     'Power'         => '120 BHP',
     'Style'         => '1930s Landaulette (Semi-Convertible)',
     'Key Features'  => 'Cream Leather Interior, Wilton Wool Carpeting, Chrome Features, Heater for Rear, Twin Running Boards',
-    'Colour'        => 'Old English White / Ivory with Black Mohair Hood',
+    'Colour'        => 'Classic Ivory with Gloss Black',
   ),
   'services'  => array( 'Weddings', 'Summer Events', 'Romantic Trips', 'Photoshoots', 'Anniversaries' ),
   'tagline'   => 'Classic 1930s styling with modern reliability &mdash; perfect for Weddings and open-top summer cruising.',

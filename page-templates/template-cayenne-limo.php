@@ -17,7 +17,7 @@ $vehicle = array(
   'thumbs'    => array( 'Porsche Cayenne Limo.jpg', '2.jpg', '3.jpg', '4.jpg' ),
   'desc'      => array(
     'The Porsche Cayenne Limo is a spectacular stretch Limousine conversion that combines the prestige of a Porsche with the party atmosphere of a luxury Limousine. Seating up to 8 passengers in style, this head-turning vehicle is the perfect choice for Proms, Birthdays, Hen Nights, and celebrations across Lancashire, Yorkshire, Cumbria, Derbyshire and Nottinghamshire.',
-    'With its premium sound system, vibrant LED lighting, champagne bar with crystal glassware, and plush seating, the Cayenne Limo transforms every journey into an unforgettable party experience. The striking Midnight Black exterior with custom trim commands attention wherever it goes, guaranteeing the kind of dramatic arrival that makes memories last a lifetime.',
+    'With its premium sound system, vibrant LED lighting, champagne bar with crystal glassware, and plush seating, the Cayenne Limo transforms every journey into an unforgettable party experience. The striking Ibis White with Black Roof exterior commands attention wherever it goes, guaranteeing the kind of dramatic arrival that makes memories last a lifetime.',
   ),
   'features'  => array(
     array( 'title' => 'Extended Interior', 'desc' => 'Stretch Limousine conversion with plush seating, mood lighting, and party atmosphere amenities for up to 8 passengers.' ),
@@ -30,7 +30,7 @@ $vehicle = array(
     'Engine'        => '4.8L V8 Turbo',
     'Transmission'  => '8-Speed Tiptronic',
     'Key Features'  => 'Stretch Conversion, LED Lighting, Premium Audio, Champagne Bar',
-    'Colour'        => 'Midnight Black with Custom Trim',
+    'Colour'        => 'Ibis White with Black Roof',
   ),
   'services'  => array( 'Proms', 'Parties', 'Birthdays', 'Hen/Stag Nights', 'Special Events', 'Celebrations' ),
   'tagline'   => 'Striking Limousine conversion with sports car DNA &mdash; perfect for making a statement arrival.',

@@ -34,6 +34,7 @@ $vehicle = array(
     'Engine'        => 'V8',
     'Transmission'  => 'Automatic (RHD)',
     'Key Features'  => 'RHD Version, Sat Nav, Heated Seats, Cooling Seats, Premier Sound, Multimedia, Keyless GO',
+    'Colour'        => 'Shadow Black',
   ),
   'services'  => array( 'Proms', 'Music Videos', 'Photoshoots', 'Special Events', 'Promotional Events', 'Film Production' ),
   'tagline'   => 'Raw American muscle with supercharged V8 power &mdash; ideal for music videos and photoshoots.',

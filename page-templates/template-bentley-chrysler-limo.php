@@ -38,7 +38,7 @@ $vehicle = array(
     'Power'         => '300 BHP',
     'Length'        => 'Stretch Limousine (30ft approx)',
     'Key Features'  => 'Bluetooth, Xenon Lights, Sat Nav, Star Lights, Multimedia, Disco Lights, Minibar, Privacy Partition',
-    'Colour'        => 'Available in Black or White',
+    'Colour'        => 'Silver with Black Roof',
   ),
   'services'  => array( 'Weddings', 'Proms', 'Birthdays', 'Hen/Stag Parties', 'Corporate Events', 'Nights Out' ),
   'tagline'   => 'The &ldquo;Baby Bentley&rdquo; stretch Limousine &mdash; sophisticated presence for bridal parties and executive groups.',

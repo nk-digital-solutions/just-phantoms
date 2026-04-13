@@ -979,32 +979,32 @@ function jp_schema_output(): void {
 		],
 		'cayenne-limo' => [
 			'name'  => 'Porsche Cayenne Limo', 'brand' => 'Porsche', 'model' => 'Cayenne Limousine',
-			'seats' => 8,
+			'seats' => 8, 'color' => 'Ibis White with Black Roof',
 			'desc'  => '8-passenger Porsche Cayenne stretch Limousine hire for Proms, Weddings and parties.',
 		],
 		'bentley-chrysler-limo' => [
 			'name'  => 'Baby Bentley Chrysler Limo', 'brand' => 'Chrysler', 'model' => 'Baby Bentley Limousine',
-			'seats' => 8,
+			'seats' => 8, 'color' => 'Silver with Black Roof',
 			'desc'  => 'Baby Bentley Chrysler stretch Limousine hire for Proms, Weddings and special occasions.',
 		],
 		'mustang-gt500' => [
 			'name'  => 'Limited Edition Ford Mustang GT500', 'brand' => 'Ford', 'model' => 'Mustang GT500',
-			'seats' => 3,
+			'seats' => 3, 'color' => 'Shadow Black',
 			'desc'  => 'Limited edition Ford Mustang GT500 hire for Proms, music videos and photoshoots.',
 		],
 		'range-rover' => [
 			'name'  => 'Range Rover Executive LWB SVO', 'brand' => 'Land Rover', 'model' => 'Range Rover LWB SVO',
-			'seats' => 4,
+			'seats' => 4, 'color' => 'Santorini Black',
 			'desc'  => 'Range Rover Executive Long-Wheelbase SVO hire for Weddings, corporate and VIP events.',
 		],
 		'vintage' => [
 			'name'  => '1930s Vintage Classic Car', 'brand' => 'Vintage', 'model' => '1930s Classic',
-			'seats' => 3,
+			'seats' => 3, 'color' => 'Classic Ivory with Gloss Black',
 			'desc'  => 'Genuine 1930s Vintage Classic car hire for Weddings and special occasions.',
 		],
 		'regent-landaulette' => [
 			'name'  => 'Regent Landaulette Convertible', 'brand' => 'Regent', 'model' => 'Landaulette Convertible',
-			'seats' => 6,
+			'seats' => 6, 'color' => 'Classic Ivory with Gloss Black',
 			'desc'  => 'Regent Landaulette open-top Convertible hire for summer Weddings and special occasions.',
 		],
 	];

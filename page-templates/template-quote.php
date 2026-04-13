@@ -56,13 +56,13 @@ get_header(); ?>
               <label for="vehicleType">Choose Car *</label>
               <select id="vehicleType" name="vehicleType" required>
                 <option value="">Select a vehicle...</option>
-                <option value="rolls-royce-phantom">Rolls Royce Phantom (4 Passengers)</option>
-                <option value="range-rover-executive">Range Rover Executive LWB SVO (4 Passengers)</option>
-                <option value="porsche-cayenne-limo">Porsche Cayenne Limo (8 Passengers)</option>
-                <option value="bentley-chrysler-limo">Baby Bentley Chrysler Limo (8 Passengers)</option>
-                <option value="mustang-gt500">Limited Edition Ford Mustang GT500 (3 Passengers)</option>
-                <option value="vintage-car">1930's Vintage Classic Car (3 Passengers)</option>
-                <option value="regent-landaulette">Regent Landaulette Convertible (6 Passengers)</option>
+                <option value="rolls-royce-phantom">Rolls Royce Phantom &ndash; Snow White (4 Passengers)</option>
+                <option value="range-rover-executive">Range Rover Autobiography LWB &ndash; Santorini Black (4 Passengers)</option>
+                <option value="porsche-cayenne-limo">Porsche Cayenne Limo &ndash; Ibis White with Black Roof (8 Passengers)</option>
+                <option value="bentley-chrysler-limo">Baby Bentley Chrysler Limo &ndash; Silver with Black Roof (8 Passengers)</option>
+                <option value="mustang-gt500">Limited Edition Ford Mustang GT500 &ndash; Shadow Black (3 Passengers)</option>
+                <option value="vintage-car">1930's Vintage Classic Car &ndash; Classic Ivory with Gloss Black (3 Passengers)</option>
+                <option value="regent-landaulette">Regent Landaulette Convertible &ndash; Classic Ivory with Gloss Black (6 Passengers)</option>
               </select>
             </div>
             <div id="vehicleImageContainer" style="display:none;margin-top:1rem;text-align:center;background:rgba(255,255,255,.04);padding:1rem;border-radius:8px;border:1px solid rgba(255,255,255,.1)">
