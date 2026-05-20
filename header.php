@@ -29,7 +29,8 @@
           <line x1="6"  y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <a class="btn ghost" href="<?php echo esc_url( home_url( '/our-fleet/' ) ); ?>" data-nav="fleet">Our Fleet</a>
+      <a class="btn ghost" href="<?php echo esc_url( home_url( '/wedding-fleet/' ) ); ?>" data-nav="wedding-fleet">Wedding Fleet</a>
+      <a class="btn ghost" href="<?php echo esc_url( home_url( '/prom-fleet/' ) ); ?>" data-nav="prom-fleet">Prom Fleet</a>
       <a class="btn ghost" href="<?php echo esc_url( home_url( '/services/' ) ); ?>" data-nav="services">Services</a>
       <a class="btn ghost" href="<?php echo esc_url( home_url( '/reviews/' ) ); ?>" data-nav="reviews">Reviews</a>
       <a class="btn ghost" href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" data-nav="faq">FAQ</a>
