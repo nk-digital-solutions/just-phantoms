@@ -154,8 +154,8 @@ get_header(); ?>
           <!-- Additional Stops -->
           <div class="form-section">
             <div class="form-group">
-                <label for="additionalStops">Additional Information</label>
-                <textarea id="additionalStops" name="additionalStops" rows="2" placeholder="e.g. Pick up friends at 5 High Street BB2 2BB, drop at hotel, wheelchair access needed, bring child seat, etc."></textarea>
+              <label for="additionalStops">Additional Information / Stops</label>
+              <textarea id="additionalStops" name="additionalStops" rows="2" placeholder="e.g. Picking up friends at 5 High Street BB2 2BB before the venue..."></textarea>
             </div>
           </div>
 
