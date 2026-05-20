@@ -80,7 +80,7 @@ function jp_enqueue_assets() {
 		wp_enqueue_script( 'jp-homepage', $uri . '/assets/js/homepage.js', array( 'jp-global' ), $ver, true );
 	}
 
-	if ( jp_is_page_template( 'fleet' ) || jp_is_page_template( 'wedding-fleet' ) || jp_is_page_template( 'prom-fleet' ) ) {
+	if ( jp_is_page_template( 'fleet' ) ) {
 		wp_enqueue_script( 'jp-fleet', $uri . '/assets/js/fleet.js', array( 'jp-global' ), $ver, true );
 	}
 
