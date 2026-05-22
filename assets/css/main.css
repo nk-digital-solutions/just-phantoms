@@ -92,10 +92,10 @@ header {
 }
 .nav { display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; }
 .nav .right { display: flex; align-items: center; gap: .6rem; }
-.nav .right .btn.ghost        { background: transparent; color: var(--text); font-size: .875rem; padding: .5rem 1rem; border: none; }
+.nav .right .btn.ghost        { background: transparent; color: var(--text); font-size: .8rem; padding: .5rem 1rem; border: none; }
 .nav .right .btn.ghost:hover  { background: transparent; color: var(--gold); }
-.nav .right .btn.primary      { font-size: .875rem; padding: .5rem 1rem; }
-.nav .right .btn-prom-quote   { font-size: .875rem; padding: .5rem 1rem; }
+.nav .right .btn.primary      { font-size: .8rem; padding: .5rem 1rem; }
+.nav .right .btn-prom-quote   { font-size: .8rem; padding: .5rem 1rem; }
 
 .logo     { display: flex; align-items: center; gap: .75rem; }
 .logo img { height: 90px; width: auto; display: block; object-fit: contain; }
